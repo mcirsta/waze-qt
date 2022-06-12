@@ -154,12 +154,6 @@ static inline void do_assert(char *text) {
 #define ROADMAP_MESSAGE_ERROR      4
 #define ROADMAP_MESSAGE_FATAL      5
 
-#if defined (ANDROID) || defined (IPHONE) || defined(GTK)
-#define __FILE_NAME__      (strrchr(__FILE__, '/') ? strrchr(__FILE__, '/') + 1 : __FILE__)
-#else
-#define __FILE_NAME__      __FILE__
-#endif
-
 #define ROADMAP_DEBUG   ROADMAP_MESSAGE_DEBUG,__FILE_NAME__,__LINE__
 #define ROADMAP_INFO    ROADMAP_MESSAGE_INFO,__FILE_NAME__,__LINE__
 #define ROADMAP_WARNING ROADMAP_MESSAGE_WARNING,__FILE_NAME__,__LINE__

@@ -43,15 +43,13 @@ BOOL roadmap_native_keyboard_enabled( void ) {
 }
 
 BOOL roadmap_native_keyboard_visible( void ) {
-
+    return false;
 }
 
 void roadmap_native_keyboard_show( RMNativeKBParams* params ) {
-
 }
 
 void roadmap_native_keyboard_hide( void ) {
-
 }
 
 void roadmap_native_keyboard_get_params( RMNativeKBParams* params_out ) {

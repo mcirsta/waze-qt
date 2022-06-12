@@ -159,12 +159,12 @@ const char *utf8_get_next_wchar (const char *s, unsigned int *ch) {
 	*ch = 0;
 
 	switch (strlen(c)) {
-	    case 6: *ch += *source++; *ch <<= 6;
-	    case 5: *ch += *source++; *ch <<= 6;
-	    case 4: *ch += *source++; *ch <<= 6;
-	    case 3: *ch += *source++; *ch <<= 6;
-	    case 2: *ch += *source++; *ch <<= 6;
-	    case 1: *ch += *source++;
+        case 6: *ch += *source++; *ch <<= 6; break;
+        case 5: *ch += *source++; *ch <<= 6; break;
+        case 4: *ch += *source++; *ch <<= 6; break;
+        case 3: *ch += *source++; *ch <<= 6; break;
+        case 2: *ch += *source++; *ch <<= 6; break;
+        case 1: *ch += *source++; break;
 	}
 	*ch -= offsetsFromUTF8[strlen(c) - 1];
 

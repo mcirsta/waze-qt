@@ -38,32 +38,8 @@ linux {
     LIBS += -ldl -lrt -lssl -lcrypto
 }
 
-!maemo5 {
-    QMAKE_CFLAGS += -Wno-unused-result -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable
-}
-
-maemo5 | !isEmpty(MEEGO_VERSION_MAJOR) {
-    DEFINES += HOME_PREFIX=\\\"MyDocs/.waze\\\"
-}
-
-!isEmpty(MEEGO_VERSION_MAJOR) {
-# harmattan pulseaudio policy
-    pulseaudio.files = waze_xpolicy.conf
-    pulseaudio.path = /etc/pulse/xpolicy.conf.d
-    export(pulseaudio.files)
-    export(pulseaudio.path)
-    INSTALLS += pulseaudio
-}
-
-maemo5 {
-# fremantle pulseaudio policy
-    pulseaudio.files = waze_xpolicy.conf
-    pulseaudio.path = /opt/waze/bin
-    export(pulseaudio.files)
-    export(pulseaudio.path)
-    INSTALLS += pulseaudio
-}
-
+QMAKE_CFLAGS += -Wno-unused-result -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable
+QMAKE_CXXFLAGS += -Wno-unused-result -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-deprecated-copy
 
 SOURCES += \
     roadmap_tile.c \

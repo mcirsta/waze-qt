@@ -152,7 +152,7 @@ static RoadMapConfigDescriptor WELOCME_WIZ_GUIDED_TOUR_URL_Var =
 
 static RoadMapCallback gCallback;
 
-
+#ifdef unused
 /////////////////////////////////////////////////////////////////////
 static BOOL is_first_time(void){
    roadmap_config_declare_enumeration( WELCOME_WIZ_CONFIG_TYPE,
@@ -165,6 +165,7 @@ static BOOL is_first_time(void){
       return TRUE;
    return FALSE;
 }
+#endif
 
 static BOOL is_terms_accepted(void){
    roadmap_config_declare_enumeration( WELCOME_WIZ_CONFIG_TYPE,
@@ -195,6 +196,7 @@ static void set_terms_accepted(){
    roadmap_config_save(TRUE);
 }
 
+#ifdef unused
 static BOOL is_wizard_enabled(void){
    roadmap_config_declare_enumeration( WELCOME_WIZ_ENABLE_CONFIG_TYPE,
                                        &WELCOME_WIZ_ENABLED_Var,
@@ -207,6 +209,8 @@ static BOOL is_wizard_enabled(void){
    return FALSE;
 
 }
+#endif
+
 /////////////////////////////////////////////////////////////////////
 static void set_first_time_no(){
    roadmap_config_set(&WELCOME_WIZ_FIRST_TIME_Var, WELCOME_WIZ_FIRST_TIME_No);
@@ -938,10 +942,12 @@ static void add_intro_texts(SsdWidget group, int tab_flag){
 	SsdWidget last_widget;
 	BOOL first_widget = TRUE;
     system_lang = roadmap_lang_get_system_lang();
-    if (!strcmp("esp",system_lang))
+    if (!strcmp("esp",system_lang)){
     	intro_text = &INTRO_ESP[0];
-    else // intro_text is english disclaimer
+    }
+    else{ // intro_text is english disclaimer
     	intro_text = &INTRO_ENG[0];
+    }
 
     //English
 	for (i=0;i<NUMBER_OF_LINES_INTRO;i++){
@@ -1072,9 +1078,10 @@ void roadmap_term_of_use(RoadMapCallback callback){
 
 
    if ( is_terms_accepted()){
-      if (callback)
+      if (callback) {
          (*callback)();
-         return;
+      }
+      return;
    }else
       gCallback = callback;
 
@@ -1089,7 +1096,7 @@ void roadmap_term_of_use(RoadMapCallback callback){
 #endif
 }
 
-
+#ifdef unused
 /////////////////////////////////////////////////////////////////////
 static BOOL is_activation_time_reached(){
 
@@ -1110,7 +1117,7 @@ static BOOL is_activation_time_reached(){
       return FALSE;
 
 }
-
+#endif
 
 /////////////////////////////////////////////////////////////////////
 static int personalize_buttons_callback (SsdWidget widget, const char *new_value) {

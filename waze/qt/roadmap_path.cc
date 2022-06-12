@@ -61,7 +61,9 @@ static RoadMapPathList RoadMapPaths;
 
 static char path_separator = '/';
 
+#ifdef unsused
 static char *roadmap_path_expand (const char *item, size_t length);
+#endif
 
 static RoadMapPathRecord roadmap_path_find (const char *name) {
 
@@ -177,10 +179,12 @@ char *roadmap_path_parent (const char *path, const char *name) {
 
    separator = strrchr (full_name, path_separator);
    if (separator == NULL) {
-      return ".";
+      separator = strdup(".");
+   }
+   else {
+      *separator = 0;
    }
 
-   *separator = 0;
 
    return full_name;
 }
@@ -248,7 +252,7 @@ static const char *roadmap_path_home (void) {
       RoadMapPathHome = strdup(QDir::homePath().toLocal8Bit().data());
 
       if (RoadMapPathHome == NULL) {
-         RoadMapPathHome = "";
+         RoadMapPathHome = strdup("");
       }
    }
 
@@ -299,7 +303,7 @@ const char *roadmap_path_trips (void) {
     return RoadMapTrips;
 }
 
-
+#ifdef unsused
 static char *roadmap_path_expand (const char *item, size_t length) {
 
    const char *expansion;
@@ -328,7 +332,7 @@ static char *roadmap_path_expand (const char *item, size_t length) {
 
    return expanded;
 }
-
+#endif
 
 /* Path lists operations. -------------------------------------------------- */
 

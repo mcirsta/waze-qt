@@ -141,8 +141,10 @@ static void decode (char *txt) {
       char *zoom;
       zoom = p + strlen(URL_ZOOM_STR);
       if (zoom)
+      {
          roadmap_log(ROADMAP_DEBUG, "decode: valid zoom %s", zoom);
          gs_Query.zoom = atoi(zoom);
+      }
       return;
    }
 
