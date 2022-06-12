@@ -26,8 +26,8 @@
 
 #include <QObject>
 #include <QList>
+#ifdef TODO
 #include <QGeoPositionInfoSource>
-QTM_USE_NAMESPACE
 
 extern "C" {
     #include "roadmap_gps.h"
@@ -55,4 +55,5 @@ private:
     QList<RoadMapGpsdNavigation> m_callbacks;
 };
 
+#endif //TODO
 #endif // QT_GPSACCESSOR_H

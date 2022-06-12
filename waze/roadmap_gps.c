@@ -1359,12 +1359,14 @@ void roadmap_gps_open (void) {
 
 #endif
 
+#ifdef MAYBE
       RoadMapGpsLink.os.serial =
          roadmap_serial_open (device, "r", atoi(speed));
 
       if (ROADMAP_SERIAL_IS_VALID(RoadMapGpsLink.os.serial)) {
          RoadMapGpsLink.subsystem = ROADMAP_IO_SERIAL;
       }
+#endif
 
       free(device);
 

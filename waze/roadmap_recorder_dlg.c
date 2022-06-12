@@ -22,6 +22,8 @@
  *
  */
 
+#ifdef TODO
+
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
@@ -271,6 +273,7 @@ static void enableDoneButton(void){
    ssd_button_enable(button);
 }
 
+#ifdef TODO
 /////////////////////////////////////////////////////////////////////
 static void onRecord(void){
    RoadMapSoundList     list  = NULL;
@@ -331,6 +334,7 @@ static void onRecord(void){
 
    setNotificationLabel(text);
 }
+#endif
 
 /////////////////////////////////////////////////////////////////////
 static void onDone(void){
@@ -537,3 +541,4 @@ void roadmap_recorder (const char *text, int seconds, recorder_closed_cb on_reco
    }
 
 }
+#endif

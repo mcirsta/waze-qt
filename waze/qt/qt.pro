@@ -4,11 +4,11 @@
 #
 #-------------------------------------------------
 
-QT       += core gui sql declarative network webkit phonon
+QT       += core gui sql declarative network phonon
 
 TARGET = wazeqt
 TEMPLATE = lib
-CONFIG += staticlib mobility
+CONFIG += staticlib
 
 maemo5 {
     CONFIG += qdbus
@@ -16,7 +16,7 @@ maemo5 {
 
 MOBILITY = location systeminfo multimedia contacts sensors
 
-DEFINES += TOUCH_SCREEN SSD QTMOBILITY FREEMAP_IL PLAY_CLICK LOCALE_SAFE PORT_RELEASE=\'\"v0.0.12\"\'
+DEFINES += TOUCH_SCREEN SSD FREEMAP_IL PLAY_CLICK LOCALE_SAFE PORT_RELEASE=\'\"v0.0.12\"\'
 
 # Please do not modify the following two lines. Required for deployment.
 include(qmlapplicationviewer/qmlapplicationviewer.pri)

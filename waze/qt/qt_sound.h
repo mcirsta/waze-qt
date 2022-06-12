@@ -5,8 +5,10 @@
 #include <QUrl>
 #include <QList>
 #include <QMutex>
+#ifdef TODO
 #include <QAudioCaptureSource>
 #include <QMediaRecorder>
+#endif
 #include <phonon/MediaObject>
 #include <phonon/MediaSource>
 #include <phonon/AudioOutput>
@@ -34,6 +36,7 @@ private:
     QList<Phonon::MediaSource> _playlist;
 };
 
+#ifdef TODO
 class Recorder : public QObject
 {
     Q_OBJECT
@@ -50,5 +53,5 @@ private:
     QAudioCaptureSource* _source;
     QMediaRecorder* _recorder;
 };
-
+#endif
 #endif // QT_SOUND_H

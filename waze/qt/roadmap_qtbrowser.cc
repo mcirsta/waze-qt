@@ -21,6 +21,7 @@
  *
  */
 
+#ifdef TODO
 #include "roadmap_qtbrowser.h"
 #include "qt_main.h"
 #include <QWebView>
@@ -116,3 +117,5 @@ static void _resize( const RoadMapGuiRect* rect )
     webview->setProperty("width", rect->maxx - rect->minx);
     webview->setProperty("height", rect->maxy - rect->miny);
 }
+
+#endif

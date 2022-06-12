@@ -27,6 +27,7 @@ extern "C" {
 #include "roadmap_gpsqtm.h"
 }
 
+#ifdef TODO
 #include <QGeoPositionInfoSource>
 #include <QGeoSatelliteInfoSource>
 #include <QGeoPositionInfo>
@@ -126,3 +127,4 @@ QGeoPositionInfo QtGpsAccessor::lastKnownPosition() {
 
     return m_location->lastKnownPosition();
 }
+#endif

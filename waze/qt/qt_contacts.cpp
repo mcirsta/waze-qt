@@ -17,6 +17,7 @@ extern "C" {
 
 extern "C" BOOL single_search_auto_search( const char* address);
 
+#if defined(QTMOBILITY)
 RContactsView::RContactsView(QDeclarativeView *parent) :
     QDeclarativeView(parent),
     _contactListModel(NULL)
@@ -75,3 +76,4 @@ void RContactsView::okPressed(QString address) {
 
     single_search_auto_search(address.toLocal8Bit().data());
 }
+#endif

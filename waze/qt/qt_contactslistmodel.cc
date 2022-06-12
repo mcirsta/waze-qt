@@ -1,3 +1,5 @@
+#if defined(QTMOBILITY)
+
 #include "qt_contactslistmodel.h"
 #include <QVariant>
 #include <QContactManager>
@@ -110,3 +112,5 @@ QVariant ContactsList::data(const QModelIndex &index, int role) const
         return QVariant();
     }
 }
+
+#endif

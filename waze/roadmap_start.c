@@ -3165,8 +3165,10 @@ void roadmap_start (int argc, char **argv) {
    roadmap_gps_initialize      ();
    roadmap_history_initialize  ();
    roadmap_adjust_initialize   ();
+#if defined(QTMOBILITY)
    roadmap_device_initialize   ();
    roadmap_power_initialize    ();
+#endif
    roadmap_login_initialize	   ();
    roadmap_map_settings_init   ();
    roadmap_download_settings_init ();
@@ -3657,7 +3659,9 @@ static BOOL on_key_pressed( const char* utf8char, uint32_t flags)
             break;
 
          case VK_Call_Start:
+#if defined(QTMOBILITY)
             roadmap_device_call_start_callback();
+#endif
             break;
 
          default:

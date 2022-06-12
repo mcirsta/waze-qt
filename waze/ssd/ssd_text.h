@@ -34,28 +34,21 @@ SsdWidget	ssd_text_new(	const char*	name,
 									int			size,
 									int			flags);
 
-#ifdef QTMOBILITY
-#define this me
-#endif
-
-void			ssd_text_set_input_type	( SsdWidget this, roadmap_input_type input_type);
-void			ssd_text_reset_text		( SsdWidget this);
-const char*	ssd_text_get_text			( SsdWidget this);
-void			ssd_text_set_text			( SsdWidget this, const char* new_value);
-void        ssd_text_set_text_size  ( SsdWidget this, int size);
-void        ssd_text_set_font_size  ( SsdWidget this, int size);
+void			ssd_text_set_input_type	( SsdWidget thiz, roadmap_input_type input_type);
+void			ssd_text_reset_text		( SsdWidget thiz);
+const char*	ssd_text_get_text			( SsdWidget thiz);
+void			ssd_text_set_text			( SsdWidget thiz, const char* new_value);
+void        ssd_text_set_text_size  ( SsdWidget thiz, int size);
+void        ssd_text_set_font_size  ( SsdWidget thiz, int size);
 int         ssd_text_get_char_height( int size);
 int         ssd_text_get_char_width ();
-void			ssd_text_set_readonly   ( SsdWidget this, BOOL read_only);
-void        ssd_text_set_auto_size  ( SsdWidget this);
-void        ssd_text_set_auto_trim  ( SsdWidget this);
-void        ssd_text_set_color      ( SsdWidget this, const char* color);
-void        ssd_text_set_lines_space_padding( SsdWidget this, int space );
-void        ssd_text_set_font_normal( SsdWidget this);
-void        ssd_text_set_use_height_factor( SsdWidget this, BOOL use_height_factor );
+void			ssd_text_set_readonly   ( SsdWidget thiz, BOOL read_only);
+void        ssd_text_set_auto_size  ( SsdWidget thiz);
+void        ssd_text_set_auto_trim  ( SsdWidget thiz);
+void        ssd_text_set_color      ( SsdWidget thiz, const char* color);
+void        ssd_text_set_lines_space_padding( SsdWidget thiz, int space );
+void        ssd_text_set_font_normal( SsdWidget thiz);
+void        ssd_text_set_use_height_factor( SsdWidget thiz, BOOL use_height_factor );
 
-#ifdef QTMOBILITY
-#undef this
-#endif
 
 #endif // __SSD_WIDGET_TEXT_H_

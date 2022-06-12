@@ -947,12 +947,14 @@ int roadmap_general_settings_events_radius(void){
 
 void roadmap_general_settings_init(void){
    roadmap_config_declare_enumeration
-           ("preferences", &RoadMapConfigGeneralLogLevel, NULL, loglevels[0], loglevels[3], NULL);
+           ("preferences", &RoadMapConfigGeneralLogLevel, NULL, loglevels[0], loglevels[1], NULL);
 
    roadmap_config_declare
       ("user", &RoadMapConfigConnectionAuto, "yes", NULL);
+#if defined(QTMOBILITY)
    roadmap_config_declare
       ("user", &RoadMapConfigBackLight, DEFAULT_BACKLIGHT_LIT_OPTION, NULL);
+#endif
    roadmap_config_declare
       ("user", &RoadMapConfigVolControl, SND_DEFAULT_VOLUME_LVL, NULL);
    roadmap_config_declare_enumeration

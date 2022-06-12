@@ -27,6 +27,7 @@
 extern "C" {
 #endif
 
+#if defined(QTMOBILITY)
 extern const int BACKLIGHT_LIT_OPTIONS_COUNT;
 extern const char* BACKLIGHT_LIT_OPTIONS[];
 extern const char* BACKLIGHT_LIT_OPTIONS_LABELS[];
@@ -36,6 +37,8 @@ int roadmap_device_initialize( void );
 void roadmap_device_set_backlight( const char* alwaysOn );
 int roadmap_device_get_battery_level( void );
 void roadmap_device_call_start_callback( void );
+#endif
+
 
 #ifdef __cplusplus
 }

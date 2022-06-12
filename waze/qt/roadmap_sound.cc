@@ -31,7 +31,10 @@
 #include <stdlib.h>
 #include <string.h>
 
+#if defined(QTMOBILITY)
 #include <QMediaResource>
+#endif
+
 #include <QFile>
 #include <QUrl>
 #include <QFileInfo>
@@ -55,7 +58,9 @@ typedef struct roadmap_sound_st {
 extern QDeclarativeView* mainWindow;
 
 Playlist *mediaPlayer = NULL;
+#ifdef TODO
 Recorder *recorder = NULL;
+#endif
 
 static RoadMapConfigDescriptor RoadMapConfigVolControl =
                         ROADMAP_CONFIG_ITEM( "Voice", "Volume Control" );
@@ -84,7 +89,9 @@ void roadmap_sound_initialize ()
 void roadmap_sound_shutdown   ()
 {
     delete mediaPlayer;
+#ifdef TODO
     delete recorder;
+#endif
 }
 
 RoadMapSoundList roadmap_sound_list_create (int flags)
@@ -258,7 +265,7 @@ int roadmap_sound_play_file (const char *file_name) {
    return -1;
 }
 
-
+#ifdef TODO
 int roadmap_sound_record (const char *file_name, int seconds) {
     if (recorder == NULL)
     {
@@ -272,6 +279,7 @@ void roadmap_sound_stop_recording (void) {
     if (recorder == NULL) return;
     recorder->stop();
 }
+#endif
 
 /***********************************************************
  *      Name    : roadmap_sound_set_volume

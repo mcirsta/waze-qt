@@ -21,7 +21,7 @@
  *   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-
+#if defined(QTMOBILITY)
 
 // Configuration entries
 #define CFG_CATEGORY_BATTERY         	( "Battery" )
@@ -44,3 +44,5 @@
 
 
 void roadmap_power_initialize( void );
+
+#endif

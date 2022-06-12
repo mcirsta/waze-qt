@@ -32,37 +32,9 @@
 #define NET_RESOLVED 0x00000002
 #define TEST_NET_COMPRESS( flags ) ( roadmap_net_get_compress_enabled() ? (flags & NET_COMPRESS) : 0 )
 
-#if defined QTMOBILITY
-
 typedef void *RoadMapSocket;
 #define ROADMAP_INVALID_SOCKET ((RoadMapSocket) NULL)
 
-#elif defined (_WIN32) && !defined (__SYMBIAN32__)
-
-#include <winsock.h>
-
-typedef SOCKET RoadMapSocket; /* WIN32 style. */
-#define ROADMAP_INVALID_SOCKET INVALID_SOCKET
-
-#elif defined J2ME
-
-struct roadmap_socket_t;
-typedef struct roadmap_socket_t *RoadMapSocket;
-#define ROADMAP_INVALID_SOCKET ((RoadMapSocket) NULL)
-
-#elif defined __SYMBIAN32__
-
-typedef void* RoadMapSocket;
-#define ROADMAP_INVALID_SOCKET NULL
-
-#else
-
-struct roadmap_socket_t;
-typedef struct roadmap_socket_t *RoadMapSocket;
-#define ROADMAP_INVALID_SOCKET ((RoadMapSocket) NULL)
-//int roadmap_net_get_fd(RoadMapSocket s);
-
-#endif /* _WIN32 */
 
 #define ROADMAP_NET_IS_VALID(s) (s != ROADMAP_INVALID_SOCKET)
 

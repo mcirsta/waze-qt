@@ -198,15 +198,15 @@ Item {
         }
 
         //////////////////////// Multi-duty Web browser ////////////////////
-        WazeBrowser {
-            id: wazeBrowser
-            width: 0
-            height: 0
-            objectName: "wazeBrowser"
-            visible: false
-            url: ""
-            z: 1
-        }
+//        WazeBrowser {
+//            id: wazeBrowser
+//            width: 0
+//            height: 0
+//            objectName: "wazeBrowser"
+//            visible: false
+//            url: ""
+//            z: 1
+//        }
         ////////////////////End of Multi-duty Web browser ////////////////////
 
         WazeMap {

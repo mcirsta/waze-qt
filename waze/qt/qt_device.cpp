@@ -28,6 +28,8 @@ extern "C" {
 #include "roadmap_device.h"
 }
 
+#if defined(QTMOBILITY)
+
 RPowerInfo::RPowerInfo(QObject* parent)
     : QObject(parent), _screenSaver(NULL)
 {
@@ -88,3 +90,5 @@ void RPowerInfo::powerStateChanged(QSystemDeviceInfo::PowerState state)
         }
     }
 }
+
+#endif

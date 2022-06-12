@@ -83,7 +83,9 @@ static QApplication* app;
 
 QGraphicsScene* scene = NULL;
 QDeclarativeView* mainWindow;
+#if defined(QTMOBILITY)
 RContactsView* contactsView;
+#endif
 RMapTimers* timers;
 QList<RoadMapIO*> ioList;
 QMainWindow* appWindow;
@@ -331,7 +333,9 @@ void roadmap_main_exit(void) {
    roadmap_start_exit();
 
    delete timers;
+#if defined(QTMOBILITY)
    delete contactsView;
+#endif
    delete mainWindow;
 
    app->quit();
@@ -411,7 +415,9 @@ static void roadmap_start_event (int event) {
                     roadmap_androidrecommend_init();
                     roadmap_androideditbox_init();
                     roadmap_androidspeechtt_init();*/
+#ifdef TODO
                     roadmap_qtbrowser_init();
+#endif
                     tts_was_provider_init();
                   break;
            }
@@ -428,26 +434,17 @@ double atof_locale_safe(const char *str) {
 
 }
 
-time_s roadmap_time_get_current()
+QDateTime roadmap_time_get_current()
 {
     QDateTime qTime = QDateTime::currentDateTime();
-    time_s current_time;
-
-    current_time.year = qTime.date().year();
-    current_time.month = qTime.date().month();
-    current_time.day = qTime.date().day();
-    current_time.hour = qTime.time().hour();
-    current_time.min = qTime.time().minute();
-    current_time.sec = qTime.time().second();
-    current_time.msec = qTime.time().msec();
-
-    return current_time;
+    return qTime;
 }
 
 time_t roadmap_time_translate(const char *hhmmss, const char *ddmmyy) {
     return QDateTime::fromString(QString(ddmmyy).append(QString(hhmmss)), QString("HHmmssddMMyy")).toTime_t();
 }
 
+#if defined(QTMOBILITY)
 void roadmap_main_show_contacts() {
     if (contactsView == NULL)
     {
@@ -459,6 +456,7 @@ void roadmap_main_show_contacts() {
     contactsView->show();
     RCommonApp::instance()->mouseAreaPressed();
 }
+#endif
 
 void roadmap_main_set_qml_context_property(const char* name, QObject* value)
 {
@@ -505,7 +503,9 @@ int main(int argc, char* argv[]) {
    QObject::connect(item, SIGNAL(invokeAction(QString)), appUtil, SLOT(invokeAction(QString)));
    QObject::connect(item, SIGNAL(buttonClicked()), appUtil, SLOT(mouseAreaPressed()));
 
+#if defined(QTMOBILITY)
    contactsView = NULL;
+#endif
 
    roadmap_option (app->argc(), app->argv(), NULL);
 

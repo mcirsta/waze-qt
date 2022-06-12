@@ -6,9 +6,12 @@
 #include <QUrl>
 #include <QList>
 #include <QVariant>
+
+#if defined(QTMOBILITY)
 #include <QContactManager>
 
 QTM_USE_NAMESPACE
+
 
 class Contact
 {
@@ -45,5 +48,6 @@ private:
     static const int AvatarUrlRole;
     static const int LocationRole;
 };
+#endif
 
 #endif // QT_CONTACTSLISTMODEL_H

@@ -250,9 +250,11 @@ static void notes_add(int mode, RoadMapPosition *point) {
          roadmap_sound_play_file ("rec_end.wav");
          break;
       case NOTES_MODE_VOICE:
+#ifdef TODO
          editor_marker_voice_file (marker, file_name, sizeof(file_name));
          roadmap_sound_record (file_name,
-                               roadmap_config_get_integer (&ConfigVoiceLength));
+         roadmap_config_get_integer (&ConfigVoiceLength));
+#endif
          break;
       default:
          roadmap_log (ROADMAP_FATAL, "Invalid note mode: %d", mode);

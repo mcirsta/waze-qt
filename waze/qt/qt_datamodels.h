@@ -3,12 +3,14 @@
 
 #include <QObject>
 #include <QString>
-#include <QOrientationSensor>
-#include <QOrientationFilter>
+
 #include <qplatformdefs.h> // MEEGO_EDITION_HARMATTAN
 
-
+#if defined(QTMOBILITY)
+#include <QOrientationSensor>
+#include <QOrientationFilter>
 QTM_USE_NAMESPACE
+#endif
 
 void qt_datamodels_register();
 
@@ -189,6 +191,8 @@ private:
     int _editState;
 };
 
+#if defined(QTMOBILITY)
+
 class OrientationFilter : public QObject, public QOrientationFilter
 {
     Q_OBJECT
@@ -249,6 +253,8 @@ private:
     OrientationFilter _filter;
     int _orientation;
 };
+
+#endif
 
 class NavigationData : public QObject
 {

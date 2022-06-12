@@ -40,9 +40,9 @@ extern "C" {
 }
 
 #include "qt_gpsaccessor.h"
+#ifdef TODO
 #include <QGeoPositionInfoSource>
 #include <QGeoPositionInfo>
-QTM_USE_NAMESPACE
 
 static QtGpsAccessor* GpsPositionSource = NULL;
 
@@ -86,3 +86,4 @@ int roadmap_gpsqtm_decode (void *user_context,
    return length;
 }
 
+#endif //TODO

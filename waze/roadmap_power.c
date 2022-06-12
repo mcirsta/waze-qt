@@ -25,7 +25,9 @@
  *   See roadmap_power.h, roadmap_device.h
  */
 
-#include <string.h> 
+
+#if defined(QTMOBILITY)
+#include <string.h>
 #include "roadmap_config.h"
 #include "roadmap_main.h"
 #include "roadmap_lang.h"
@@ -282,3 +284,5 @@ static void roadmap_power_state_handler_warn_2( void )
 	ssd_confirm_dialog ( "", fmtText, TRUE, roadmap_power_confirm_warn_2, NULL);
 	gConfirmDialogShown = TRUE;
 }
+
+#endif

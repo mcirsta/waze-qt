@@ -25,6 +25,7 @@
 #define QT_DEVICE_H
 
 #include <QObject>
+#if defined(QTMOBILITY)
 #include <QSystemDeviceInfo>
 #include <QSystemScreenSaver>
 
@@ -52,6 +53,7 @@ private:
     QSystemScreenSaver* _screenSaver;
     const char* _backlightValue;
 };
+#endif
 
 
 #endif // QT_DEVICE_H

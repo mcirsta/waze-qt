@@ -31,11 +31,13 @@ extern "C" {
     #include "roadmap_lang.h"
 }
 
-#include <QSystemScreenSaver>
-#include <QSystemDeviceInfo>
+
 #include "qt_main.h"
 #include "qt_device.h"
 
+#if defined(QTMOBILITY)
+#include <QSystemScreenSaver>
+#include <QSystemDeviceInfo>
 QTM_USE_NAMESPACE
 
 const int BACKLIGHT_LIT_OPTIONS_COUNT = 3;
@@ -105,3 +107,21 @@ BOOL roadmap_camera_take_picture( CameraImageFile* image_file, CameraImageBuf* i
 BOOL roadmap_camera_take_picture_async( CameraImageCaptureCallback callback, CameraImageCaptureContext* context ) {
     /* TODO */
 }
+#else
+void roadmap_device_call_start_callback( void ) {
+    /* TODO */
+}
+
+BOOL roadmap_horizontal_screen_orientation() {
+    /* TODO */
+    return true;
+}
+
+BOOL roadmap_camera_take_picture( CameraImageFile* image_file, CameraImageBuf* image_thumbnail ) {
+    /* TODO */
+}
+
+BOOL roadmap_camera_take_picture_async( CameraImageCaptureCallback callback, CameraImageCaptureContext* context ) {
+    /* TODO */
+}
+#endif

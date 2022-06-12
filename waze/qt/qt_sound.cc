@@ -55,6 +55,7 @@ void Playlist::setVolume(qreal volume)
     _output.setVolume(volume);
 }
 
+#ifdef TODO
 Recorder::Recorder(QObject* parent) :
     QObject(parent)
 {
@@ -80,3 +81,4 @@ void Recorder::stop()
 {
     _recorder->stop();
 }
+#endif

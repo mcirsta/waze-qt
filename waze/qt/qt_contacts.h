@@ -1,6 +1,7 @@
 #ifndef QT_CONTACTS_H
 #define QT_CONTACTS_H
 
+#if defined(QTMOBILITY)
 #include <QDeclarativeView>
 #include "qt_contactslistmodel.h"
 #include "qt_main.h"
@@ -24,4 +25,5 @@ private:
     ContactsList* _contactListModel;
 };
 
+#endif
 #endif // QT_CONTACTS_H

@@ -6452,6 +6452,7 @@ const RoadMapGpsPosition *RTAlerts_alerts_location(BOOL showMsgBox){
 
 #ifdef TOUCH_SCREEN
 
+#ifdef TODO
 ////////////////////////////////////////////////////////////////////
 static void on_recorder_closed( int exit_code, void *context ){
    SsdWidget button;
@@ -6501,6 +6502,13 @@ static BOOL is_voice_recorded( void )
    res = roadmap_file_exists( path, file_name );
    return res;
 }
+#else
+static BOOL is_voice_recorded( void )
+{
+   BOOL res = FALSE;
+   return res;
+}
+#endif
 
 ////////////////////////////////////////////////////////////////////
 static int report_menu_buttons_callback (SsdWidget widget, const char *new_value) {
@@ -7229,7 +7237,9 @@ static void report_dialog(int iAlertType){
    icon[0] = "button_record";
    icon[1] = "button_record";
    icon[2] = NULL;
+#ifdef TODO
    button = ssd_button_new( "Record_button", "Record", (const char**) &icon[0], 2, SSD_ALIGN_CENTER|SSD_ALIGN_VCENTER, on_record_button );
+#endif
    ssd_widget_add(box, button);
    ssd_dialog_add_hspace(box, 5, 0);
 #endif
