@@ -224,10 +224,8 @@ static char* get_download_url (int type, const char *lang, const char* name) {
       return NULL;
    }
    // Size of prefix +  size of image id + '\0'
-   url = malloc (strlen (url_prefix) + strlen(url_ver) + strlen (name) + +strlen (lang) + +strlen (
+   url = roadmap_allocate_and_check (strlen (url_prefix) + strlen(url_ver) + strlen (name) + +strlen (lang) + +strlen (
                   roadmap_geo_config_get_server_id ()) + 10);
-
-   roadmap_check_allocated( url );
 
    strcpy (url, url_prefix);
 

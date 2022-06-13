@@ -58,8 +58,7 @@ static void *roadmap_shape_map (const roadmap_db_data_file *file) {
 
    RoadMapShapeContext *context;
 
-   context = malloc(sizeof(RoadMapShapeContext));
-   roadmap_check_allocated(context);
+   context = roadmap_allocate_and_check(sizeof(RoadMapShapeContext));
 
    context->type = RoadMapShapeType;
 

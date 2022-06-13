@@ -218,6 +218,9 @@ const char *roadmap_log_filename (void);
 #define roadmap_check_allocated(p) \
             roadmap_check_allocated_with_source_line(__FILE__,__LINE__,p)
 
+#define roadmap_allocate_and_check(p) \
+            roadmap_allocate_and_check_with_source_line(__FILE__,__LINE__,p)
+
 #define ROADMAP_SHOW_AREA        1
 #define ROADMAP_SHOW_SQUARE      2
 
@@ -249,6 +252,10 @@ void roadmap_option (int argc, char **argv, RoadMapUsage usage);
 /* This function is hidden by a macro: */
 void roadmap_check_allocated_with_source_line
                 (const char *source, int line, const void *allocated);
+
+/* This function is hidden by a macro: */
+void *roadmap_allocate_and_check_with_source_line
+                (const char *source, int line, const size_t alloc_size);
 
 typedef void (* RoadMapCallback) (void);
 

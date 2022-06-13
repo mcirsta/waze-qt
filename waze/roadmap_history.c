@@ -123,9 +123,8 @@ static void roadmap_history_add_entry (char category, const char *data) {
 
 	   if (entry == NULL) {
 
-	       entry = malloc (strlen(data) +
+           entry = roadmap_allocate_and_check(strlen(data) +
 	                       sizeof(struct roadmap_history_log_entry));
-	       roadmap_check_allocated(entry);
 
 	       entry->category = category;
 

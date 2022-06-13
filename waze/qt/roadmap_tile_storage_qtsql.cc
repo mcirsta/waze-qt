@@ -545,8 +545,7 @@ int roadmap_tile_load (int fips, int tile_index, void **data, size_t *size)
 	{
                 QByteArray dataVar = query.value(0).toByteArray();
                 *size = dataVar.length();
-                *data = malloc( *size );
-                roadmap_check_allocated( *data );
+                *data = roadmap_allocate_and_check( *size );
                 memcpy( *data, dataVar.data(), *size );
 		res = 0;
 	}

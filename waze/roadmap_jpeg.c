@@ -106,11 +106,10 @@ void JpegConvTargetBufType( JpegConvBufType type )
 	 fseek( fd, 0, SEEK_END );
      size = ftell( fd );
 	 // Get the buffer
-     buf = malloc( size );
+     buf = roadmap_allocate_and_check( size );
 	 fseek( fd, 0, SEEK_SET );
 	 fread( buf, 1, size, fd );
 	 fclose( fd );
-	 roadmap_check_allocated( buf );
 	 // Convert the buffer
 	 njInit();
 	 njDecode( buf, size );

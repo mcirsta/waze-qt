@@ -220,10 +220,7 @@ static char* get_download_url(int id_type, int id, int id2, int size)
 
     url_prefix = roadmap_config_get ( &CfgSocialImageUrlPrefix );
 
-    url = malloc( strlen( url_prefix ) + 200 );
-
-    roadmap_check_allocated( url );
-
+    url = roadmap_allocate_and_check( strlen( url_prefix ) + 200 );
 
     if (id_type == SOCIAL_IMAGE_ID_TYPE_USER)
         strcpy(id_type_str,"session");

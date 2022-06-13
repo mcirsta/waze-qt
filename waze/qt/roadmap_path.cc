@@ -148,9 +148,7 @@ static RoadMapPathRecord roadmap_path_find (const char *name) {
 
 static char *roadmap_path_cat (const char *s1, const char *s2) {
 
-    char *result = (char*) malloc (strlen(s1) + strlen(s2) + 4);
-
-    roadmap_check_allocated (result);
+    char *result = (char*) roadmap_allocate_and_check(strlen(s1) + strlen(s2) + 4);
 
     strcpy (result, s1);
     strcat (result, "/");

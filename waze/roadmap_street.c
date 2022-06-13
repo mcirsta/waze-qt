@@ -106,8 +106,7 @@ static void *roadmap_street_map (const roadmap_db_data_file *file) {
 
    RoadMapStreetContext *context;
 
-   context = malloc (sizeof(RoadMapStreetContext));
-   roadmap_check_allocated(context);
+   context = roadmap_allocate_and_check (sizeof(RoadMapStreetContext));
 
    context->type = RoadMapStreetType;
    context->RoadMapStreetPrefix = NULL;

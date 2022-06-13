@@ -121,8 +121,7 @@ BOOL tts_db_files_get( const TtsPath* db_path, TtsData* db_data )
    if ( db_data && ( file = roadmap_file_open( db_path->path, "r" ) ) )
    {
      db_data->data_size = roadmap_file_length( db_path->path, NULL );
-     db_data->data = malloc( db_data->data_size );
-     roadmap_check_allocated( db_data->data );
+     db_data->data = roadmap_allocate_and_check( db_data->data_size );
      roadmap_file_read( file, db_data->data, db_data->data_size );
      result = TRUE;
    }

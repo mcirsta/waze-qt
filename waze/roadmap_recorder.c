@@ -207,9 +207,7 @@ static char* get_download_url( const char* voice_id )
     url_prefix = roadmap_config_get ( &RMCfgRecorderVoiceUrlPrefix );
 
     // Size of prefix +  size of voice id + '\0'
-    url = malloc( strlen( url_prefix ) + strlen( voice_id ) + 1 );
-
-    roadmap_check_allocated( url );
+    url = roadmap_allocate_and_check ( strlen( url_prefix ) + strlen( voice_id ) + 1 );
 
     strcpy( url, url_prefix );
 	strcat( url, voice_id );
@@ -541,9 +539,7 @@ static char* get_upload_url( void )
 
    // Size of prefix +  size of session id + cookie '\0'
    size = strlen( url_prefix ) + 50 + strlen (Realtime_GetServerCookie()) + 1;
-   url = malloc( size );
-
-   roadmap_check_allocated( url );
+   url = roadmap_allocate_and_check( size );
 
    snprintf(url, size, "%s?sessionid=%d&cookie=%s",
             url_prefix,

@@ -1950,8 +1950,7 @@ void mark_location(void){
     const RoadMapPosition 		*GpsPosition;
     BOOL has_position = FALSE;
 
-	CurrentGpsPoint = malloc(sizeof(*CurrentGpsPoint));
-	roadmap_check_allocated(CurrentGpsPoint);
+    CurrentGpsPoint = roadmap_allocate_and_check(sizeof(*CurrentGpsPoint));
 
 	if (roadmap_navigate_get_current
 		(CurrentGpsPoint, &line, &direction) == -1) {
@@ -2174,8 +2173,7 @@ void start_alerts_menu(void){
       return;
    }
 
-	CurrentGpsPoint = malloc(sizeof(*CurrentGpsPoint));
-	roadmap_check_allocated(CurrentGpsPoint);
+    CurrentGpsPoint = roadmap_allocate_and_check(sizeof(*CurrentGpsPoint));
 	if (roadmap_navigate_get_current
         (CurrentGpsPoint, &line, &direction) == -1) {
 		 GpsPosition = roadmap_trip_get_position ("GPS");

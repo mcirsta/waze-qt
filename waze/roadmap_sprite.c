@@ -86,9 +86,7 @@ RoadMapGuiPoint *RoadMapSpritePoints = NULL;
 
 static char *roadmap_sprite_string (const char *data, int length) {
 
-    char *p = malloc (length+1);
-
-    roadmap_check_allocated(p);
+    char *p = roadmap_allocate_and_check (length+1);
 
     strncpy (p, data, length);
     p[length] = 0;
@@ -218,9 +216,7 @@ static void roadmap_sprite_decode_circle
 static RoadMapSprite roadmap_sprite_new
           (int argc, const char **argv, int *argl) {
 
-   RoadMapSprite sprite = malloc(sizeof(*sprite));
-
-   roadmap_check_allocated(sprite);
+   RoadMapSprite sprite = roadmap_allocate_and_check(sizeof(*sprite));
 
    memset (sprite, 0, sizeof(*sprite));
 

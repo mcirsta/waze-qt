@@ -47,8 +47,7 @@ static void *roadmap_range_map (const roadmap_db_data_file *file) {
 
    RoadMapRangeContext *context;
 
-   context = malloc (sizeof(RoadMapRangeContext));
-   roadmap_check_allocated(context);
+   context = roadmap_allocate_and_check (sizeof(RoadMapRangeContext));
 
    context->type = RoadMapRangeType;
    context->RoadMapRanges = NULL;

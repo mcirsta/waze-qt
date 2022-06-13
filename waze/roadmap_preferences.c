@@ -126,7 +126,7 @@ static void roadmap_preferences_new_item
 
    if (list == NULL) {
 
-      list = malloc (sizeof(CategoryList));
+      list = roadmap_allocate_and_check (sizeof(CategoryList));
       roadmap_check_allocated(list);
 
       list->name     = cursor->category;
@@ -261,8 +261,7 @@ static void roadmap_preferences_show (const char *file, const char *title) {
     if (context == NULL) {
 
         context = (ConfigurationContext *)
-                        malloc (sizeof(ConfigurationContext));
-        roadmap_check_allocated(context);
+                        roadmap_allocate_and_check (sizeof(ConfigurationContext));
 
         context->name = strdup(title);
         context->children = NULL;

@@ -303,9 +303,7 @@ static struct dictionary_volume *
 
    /* Retrieve all the database sections: */
 
-   dictionary = malloc (sizeof(struct dictionary_volume));
-
-   roadmap_check_allocated(dictionary);
+   dictionary = roadmap_allocate_and_check(sizeof(struct dictionary_volume));
 
    dictionary->name = name;
 

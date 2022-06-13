@@ -979,8 +979,7 @@ void roadmap_download_subscribe_protocol  (const char *prefix,
 
    struct roadmap_download_protocol *protocol;
 
-   protocol = malloc (sizeof(*protocol));
-   roadmap_check_allocated(protocol);
+   protocol = roadmap_allocate_and_check(sizeof(*protocol));
 
    protocol->prefix = strdup(prefix);
    protocol->handler = handler;

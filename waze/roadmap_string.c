@@ -81,8 +81,7 @@ RoadMapDynamicString roadmap_string_new (const char *value) {
 
       int length = strlen(value);
 
-      item = malloc (sizeof(struct roadmap_string_descriptor) + length);
-      roadmap_check_allocated(item);
+      item = roadmap_allocate_and_check (sizeof(struct roadmap_string_descriptor) + length);
 
       item->previous = NULL;
       item->next = RoadMapStringHeads[hash];
@@ -111,8 +110,7 @@ RoadMapDynamicString roadmap_string_new_in_collection
 
    if (collection->count >= ROADMAP_STRING_COLLECTION_BLOCK) {
 
-      collection->next = malloc (sizeof(RoadMapDynamicStringCollection));
-      roadmap_check_allocated(collection->next);
+      collection->next = roadmap_allocate_and_check (sizeof(RoadMapDynamicStringCollection));
 
       collection = collection->next;
       collection->count = 0;

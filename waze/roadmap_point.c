@@ -61,8 +61,7 @@ static void *roadmap_point_map (const roadmap_db_data_file *file) {
 
    RoadMapPointContext *context;
 
-   context = malloc (sizeof(RoadMapPointContext));
-   roadmap_check_allocated(context);
+   context = roadmap_allocate_and_check (sizeof(RoadMapPointContext));
    context->type = RoadMapPointType;
 
    if (!roadmap_db_get_data (file,

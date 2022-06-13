@@ -122,9 +122,7 @@ static BOOL initialized = FALSE;
 
 static char *roadmap_object_string (const char *data, int length) {
 
-    char *p = malloc (length+1);
-
-    roadmap_check_allocated(p);
+    char *p = roadmap_allocate_and_check (length+1);
 
     strncpy (p, data, length);
     p[length] = 0;

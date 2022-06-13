@@ -7232,16 +7232,18 @@ static void report_dialog(int iAlertType){
    if (!sub_type_container)
       txtbox_height = ADJ_SCALE(83);
 
+#ifdef TODO
 #if defined(QTMOBILITY) || (!defined(__SYMBIAN32__) && !defined(_WIN32))
 //#ifndef __SYMBIAN32__
    icon[0] = "button_record";
    icon[1] = "button_record";
    icon[2] = NULL;
-#ifdef TODO
+
    button = ssd_button_new( "Record_button", "Record", (const char**) &icon[0], 2, SSD_ALIGN_CENTER|SSD_ALIGN_VCENTER, on_record_button );
-#endif
+
    ssd_widget_add(box, button);
    ssd_dialog_add_hspace(box, 5, 0);
+#endif
 #endif
    text_box = ssd_entry_new( roadmap_lang_get("Additional Details"),"",SSD_WIDGET_SPACE|SSD_END_ROW|SSD_WS_TABSTOP|SSD_ALIGN_VCENTER,0, SSD_MAX_SIZE, txtbox_height,roadmap_lang_get("<Add description>"));
 	ssd_entry_set_kb_params( text_box, roadmap_lang_get("Additional Details"), NULL, NULL, NULL, SSD_KB_DLG_TYPING_LOCK_ENABLE );

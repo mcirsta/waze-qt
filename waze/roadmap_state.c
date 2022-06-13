@@ -54,9 +54,7 @@ static RoadMapCallback RoadMapStateMonitors[ROADMAP_STATE_CLIENTS] = {NULL};
 
 void roadmap_state_add (const char *name, RoadMapStateFn state_fn) {
 
-   RoadMapState object = malloc(sizeof(*object));
-
-   roadmap_check_allocated(object);
+   RoadMapState object = roadmap_allocate_and_check(sizeof(*object));
 
    object->name = strdup (name);
    object->state_fn = state_fn;

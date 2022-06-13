@@ -542,8 +542,7 @@ int roadmap_label_add (const RoadMapGuiPoint *point, int angle,
          RoadMapLabelCacheFull = 1;
          return -1;
       }
-      cPtr = malloc (sizeof (*cPtr));
-      roadmap_check_allocated (cPtr);
+      cPtr = roadmap_allocate_and_check(sizeof (*cPtr));
       RoadMapLabelCacheAlloced++;
    }
 
@@ -686,8 +685,7 @@ int roadmap_label_add_place (const RoadMapGuiPoint *point, int angle,
          RoadMapLabelCacheFull = 1;
          return -1;
       }
-      cPtr = malloc (sizeof (*cPtr));
-      roadmap_check_allocated (cPtr);
+      cPtr = roadmap_allocate_and_check(sizeof (*cPtr));
       RoadMapLabelCacheAlloced++;
    }
 

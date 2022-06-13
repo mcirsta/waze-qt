@@ -663,9 +663,8 @@ RoadMapNmeaAccount  roadmap_nmea_create(const char *name) {
    for (count = 0; RoadMapNmeaPhrase[count].decoder != NULL; ++count) ;
 
    account = (RoadMapNmeaAccount)
-      malloc (sizeof(struct RoadMapNmeaAccountRecord)
+      roadmap_allocate_and_check (sizeof(struct RoadMapNmeaAccountRecord)
                  + (sizeof(RoadMapNmeaListener) * count));
-   roadmap_check_allocated(account);
 
    account->name  = strdup(name);
    account->count = count;

@@ -416,6 +416,14 @@ void roadmap_check_allocated_with_source_line
     }
 }
 
+void *roadmap_allocate_and_check_with_source_line
+(const char *source, int line, const size_t alloc_size) {
+    void *allocated = malloc(alloc_size);
+    if (allocated == NULL) {
+        roadmap_log (ROADMAP_MESSAGE_FATAL, source, line, "no more memory");
+    }
+    return allocated;
+}
 /*
  * Logging of the raw data without any formatting and additional information
  * The logger file has to be opened before !

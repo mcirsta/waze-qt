@@ -146,8 +146,7 @@ static int roadmap_db_call_map (roadmap_db_database *database) {
    		if (!handler_context) res = 0;
    	}
    	
-		context = (roadmap_db_context *) malloc (sizeof (roadmap_db_context));	
-		roadmap_check_allocated (context);
+        context = (roadmap_db_context *) roadmap_allocate_and_check (sizeof (roadmap_db_context));
 			
 		context->model = model;
 		context->next = database->context;
@@ -242,9 +241,7 @@ roadmap_db_model *roadmap_db_register
 
    roadmap_db_model *registered;
 
-   registered = malloc (sizeof(roadmap_db_model));
-
-   roadmap_check_allocated(registered);
+   registered = roadmap_allocate_and_check(sizeof(roadmap_db_model));
 
    registered->sector  = *sector;
    registered->handler = handler;

@@ -84,8 +84,7 @@ static void *roadmap_turns_map (roadmap_db *root) {
    }
 
 
-   context = malloc(sizeof(RoadMapTurnsContext));
-   roadmap_check_allocated(context);
+   context = roadmap_allocate_and_check(sizeof(RoadMapTurnsContext));
 
    context->type = RoadMapTurnsType;
 

@@ -131,9 +131,7 @@ static RoadMapDialogItem roadmap_dialog_get (RoadMapDialogItem parent,
 
    /* We did not find this child: create a new one. */
 
-   child = (RoadMapDialogItem) malloc (sizeof (*child));
-
-   roadmap_check_allocated(child);
+   child = (RoadMapDialogItem) roadmap_allocate_and_check(sizeof (*child));
 
    child->typeid = "RoadMapDialogItem";
 

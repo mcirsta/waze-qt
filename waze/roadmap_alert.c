@@ -198,8 +198,7 @@ static void *roadmap_alert_map (const roadmap_db_data_file *file) {
 
    RoadMapAlertContext *context;
 
-   context = malloc(sizeof(RoadMapAlertContext));
-   roadmap_check_allocated(context);
+   context = roadmap_allocate_and_check(sizeof(RoadMapAlertContext));
 
    context->type = RoadMapAlertType;
 

@@ -66,8 +66,7 @@ static void *roadmap_polygon_map (const roadmap_db_data_file *file) {
 
    RoadMapPolygonContext *context;
 
-   context = malloc (sizeof(RoadMapPolygonContext));
-   roadmap_check_allocated(context);
+   context = roadmap_allocate_and_check (sizeof(RoadMapPolygonContext));
 
    context->type = RoadMapPolygonType;
 

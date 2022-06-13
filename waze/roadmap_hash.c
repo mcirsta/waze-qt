@@ -51,9 +51,7 @@ static RoadMapHash *HashLast = NULL;
 RoadMapHash *roadmap_hash_new (const char *name, int size) {
 
    int i;
-   RoadMapHash *hash = malloc (sizeof(RoadMapHash));
-
-   roadmap_check_allocated(hash);
+   RoadMapHash *hash = roadmap_allocate_and_check(sizeof(RoadMapHash));
 
    hash->name = name;
 
@@ -62,10 +60,8 @@ RoadMapHash *roadmap_hash_new (const char *name, int size) {
    }
 
    hash->size = size;
-   hash->next = malloc (size * sizeof(int));
+   hash->next = roadmap_allocate_and_check(size * sizeof(int));
    hash->values = NULL;
-
-   roadmap_check_allocated(hash->next);
 
    for (i = 0; i < size; i++) {
       hash->next[i] = -1;

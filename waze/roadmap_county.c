@@ -84,8 +84,7 @@ static void *roadmap_county_map (roadmap_db *root) {
    RoadMapCountyContext *context;
 
 
-   context = malloc (sizeof(RoadMapCountyContext));
-   roadmap_check_allocated(context);
+   context = roadmap_allocate_and_check (sizeof(RoadMapCountyContext));
 
    context->type = RoadMapCountyType;
 

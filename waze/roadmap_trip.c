@@ -250,8 +250,7 @@ static RoadMapTripPoint *roadmap_trip_update
         /* A new point: refresh is needed only if this point
          * is visible.
          */
-        result = malloc (sizeof(RoadMapTripPoint));
-        roadmap_check_allocated(result);
+        result = roadmap_allocate_and_check(sizeof(RoadMapTripPoint));
 
         result->id = strdup(name);
         roadmap_check_allocated(result->id);
@@ -1421,8 +1420,7 @@ void roadmap_trip_save_screenshot (void) {
    }
 
    total_length = trip_length + strlen(trip_path) + strlen(extension) + 12;
-   picture_name = malloc (total_length);
-   roadmap_check_allocated(picture_name);
+   picture_name = roadmap_allocate_and_check (total_length);
 
    memcpy (picture_name, trip_name, trip_length);
    sprintf (picture_name, "%s/%*.*s-%010d%s",

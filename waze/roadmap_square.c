@@ -141,10 +141,9 @@ static void *roadmap_square_map (const roadmap_db_data_file *file) {
 
 	roadmap_city_init ();
 
-   context = malloc(sizeof(RoadMapSquareContext));
-   roadmap_check_allocated(context);
+   context = roadmap_allocate_and_check(sizeof(RoadMapSquareContext));
 
-	RoadMapSquareActive = context;
+   RoadMapSquareActive = context;
 
    context->type = RoadMapSquareType;
 
@@ -370,8 +369,7 @@ static void *roadmap_square_map_one (const roadmap_db_data_file *file) {
    int index;
    int slot;
 
-   context = malloc(sizeof(RoadMapSquareData));
-   roadmap_check_allocated(context);
+   context = roadmap_allocate_and_check(sizeof(RoadMapSquareData));
 
    if (!roadmap_db_get_data (file,
    								  model__tile_square_data,

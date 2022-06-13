@@ -389,8 +389,7 @@ BOOL tts_db_sqlite_get( const TtsDbEntry* entry, TtsDbDataStorageType* storage_t
       if ( !dataVar.isNull() && ( dataVar.length() > 0 ) )
       {
           db_data->data_size = dataVar.length();
-          db_data->data = malloc( db_data->data_size );
-          roadmap_check_allocated( db_data->data );
+          db_data->data = roadmap_allocate_and_check( db_data->data_size );
           memcpy( db_data->data, dataVar.data(), db_data->data_size );
       }
 
