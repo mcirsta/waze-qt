@@ -26,8 +26,7 @@ linux {
     LIBS += -ldl -lrt -lssl -lcrypto
 }
 
-QMAKE_CFLAGS += -Wno-unused-result -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-unused-function -Wno-char-subscripts -Wno-error=shift-negative-value \
-                 -Werror
+QMAKE_CFLAGS += -Wno-unused-result -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-unused-function -Wno-char-subscripts -Werror
 QMAKE_CXXFLAGS += -Wno-unused-result -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-deprecated-copy -Wno-error=class-memaccess -Werror
 
 SOURCES += \
