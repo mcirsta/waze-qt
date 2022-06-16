@@ -1038,7 +1038,7 @@ const RoadMapPosition *roadmap_trip_get_focus_position (void) {
 }
 
 
-const RoadMapPosition *roadmap_trip_get_position (const char *name) {
+RoadMapPosition *roadmap_trip_get_position (const char *name) {
 
    RoadMapTripPoint *trip = NULL;
 

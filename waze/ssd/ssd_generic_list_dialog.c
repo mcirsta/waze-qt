@@ -22,6 +22,7 @@
 #include "roadmap_lang.h"
 #include "ssd_dialog.h"
 #include "ssd_list.h"
+#include "ssd_container.h"
 
 #include "ssd_generic_list_dialog.h"
 

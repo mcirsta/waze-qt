@@ -78,7 +78,7 @@ int roadmap_base64_encode (const void* inData, int inLength, char** outText, int
 
 int roadmap_base64_decode (char* inText, void** outData) {
 //AR: Decoding code untested
-   int i;
+   size_t i;
    int inputLength = strlen(inText) -1;
    static int initialized = 0;
    

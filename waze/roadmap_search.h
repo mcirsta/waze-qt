@@ -53,6 +53,7 @@ void search_menu_single_search(void);
 void search_menu_search_local(void);
 void search_menu_my_saved_places(void);
 void search_menu_geo_reminders(void);
+void search_menu_set_local_search_attrs(void);
 
 void roadmap_search_navigate_to_favorite( const char *favorite );
 

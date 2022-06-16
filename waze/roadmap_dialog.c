@@ -260,7 +260,7 @@ static void roadmap_dialog_chosen (char *name, void *context) {
      if (!strlen(value)) item->value = "";
      else item->value = strdup(value);
 
-     roadmap_log(ROADMAP_DEBUG, "In roadmap_dialog_chosen(edit): str:%s, callback:0x%x\n", item->value, (int)callback);
+     roadmap_log(ROADMAP_DEBUG, "In roadmap_dialog_chosen(edit): str:%s, callback:0x%x\n", item->value, (intptr_t)callback);
 
      if (callback != NULL) {
 
@@ -335,7 +335,7 @@ static void roadmap_dialog_chosen (char *name, void *context) {
          else item->value = strdup(value);
 
          roadmap_log(ROADMAP_DEBUG, "In roadmap_dialog_chosen(choice): i:%d str:%s, callback:0x%d\n",
-            i, item->value, (int)selection->callback);
+            i, item->value, (intptr_t)selection->callback);
       } else {
          item->value = selection->value;
       }

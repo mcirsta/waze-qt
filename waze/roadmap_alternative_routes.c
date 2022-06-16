@@ -54,6 +54,7 @@
 #include "roadmap_bar.h"
 #include "roadmap_screen_obj.h"
 #include "roadmap_object.h"
+#include "roadmap_speedometer.h"
 #if defined(ANDROID)
 #include "roadmap_appwidget.h"
 #endif
@@ -136,6 +137,8 @@ static int compare_routes_options_sk_cb (SsdWidget widget, const char *new_value
 static void kill_timer (void);
 static int on_drive_btn_cb (SsdWidget widget, const char *new_value);
 static int on_routes_selection_all (SsdWidget widget, const char *new_value);
+static int on_routes_selection_all_point(SsdWidget widget, const RoadMapGuiPoint *point);
+
 
 static int g_seconds;
 static SsdWidget dialog;
@@ -811,7 +814,7 @@ void highligh_selection(int route){
       }
 
       ssd_widget_set_color(container, "#000000", "#000000");
-      container->short_click = on_routes_selection_all;
+      container->short_click = on_routes_selection_all_point;
 
    }
    else{
@@ -829,8 +832,11 @@ void highligh_selection(int route){
 
    }
 }
+
+
 //////////////////////////////////////////////////////////////////////////////////////////////////
 static int on_routes_selection_all (SsdWidget widget, const char *new_value) {
+    (void)new_value;
    AltRouteTrip *pAltRoute;
    int i;
    int num_routes;
@@ -860,6 +866,9 @@ static int on_routes_selection_all (SsdWidget widget, const char *new_value) {
    return 1;
 }
 
+static int on_routes_selection_all_point(SsdWidget widget, const RoadMapGuiPoint *point) {
+    return on_routes_selection_all(widget, NULL);
+}
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 void add_routes_selection(SsdWidget dialog){
@@ -1699,7 +1708,7 @@ static void roadmap_alertnative_routes_after_login (void) {
 //////////////////////////////////////////////////////////////////////////////////////////////////
 static void on_show_routes_dlg_closed (int exit_code, void* context) {
    int i;
-   char box_name[10];
+   char box_name[20];
 
    int num_routes = RealtimeAltRoutes_Get_Num_Routes ();
 

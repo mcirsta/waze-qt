@@ -83,7 +83,7 @@ typedef struct
 {
    CameraImageFile image_file;
    CameraImageBuf image_thumbnail;
-   const void* callback_data;    // Data provided by the callback supplier
+   void* callback_data;    // Data provided by the callback supplier
 } CameraImageCaptureContext;
 
 // Asynchronous capture callback

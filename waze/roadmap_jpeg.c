@@ -209,7 +209,7 @@ inline static void TargetPixelSetPixel( unsigned char** pixel_ptr, unsigned char
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////// Nano Jpeg Decoder Section ///////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+#ifdef unused
 // njIsColor: Return 1 if the most recently decoded image is a color image
 // (RGB) or 0 if it is a grayscale image. If njDecode() failed, the result
 // of njGetWidth() is undefined.
@@ -221,7 +221,7 @@ static int njIsColor(void);
 // by njGetImage(). If njDecode() failed, the result of njGetImageSize() is
 // undefined.
 static int njGetImageSize(void);
-
+#endif
 
 #define NJ_INLINE static inline
 #define NJ_FORCE_INLINE static inline
@@ -834,6 +834,8 @@ nj_result_t njDecode(const void* jpeg, const int size) {
 
 int njGetWidth(void)            { return nj.width; }
 int njGetHeight(void)           { return nj.height; }
+#ifdef unused
 int njIsColor(void)             { return (nj.ncomp != 1); }
-unsigned char* njGetImage(void) { return (nj.ncomp == 1) ? nj.comp[0].pixels : nj.rgb; }
 int njGetImageSize(void)        { return nj.width * nj.height * nj.ncomp; }
+#endif
+unsigned char* njGetImage(void) { return (nj.ncomp == 1) ? nj.comp[0].pixels : nj.rgb; }

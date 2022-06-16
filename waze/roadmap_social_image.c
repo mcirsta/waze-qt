@@ -54,7 +54,7 @@ typedef struct image_slot {
 }image_slot;
 
 static int  download_size_callback( void *context_cb, size_t size );
-static void download_progress_callback( void *context_cb, char *data, size_t size );
+static void download_progress_callback(void *context_cb, const char *data, size_t size );
 static void download_error_callback( void *context_cb, int connection_failure, const char *format, ... );
 static void download_done_callback( void *context_cb, char *last_modified, const char *format, ...  );
 
@@ -151,7 +151,7 @@ static int  download_size_callback( void *context_cb, size_t size )
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-static void download_progress_callback( void *context_cb, char *data, size_t size )
+static void download_progress_callback( void *context_cb,const char *data, size_t size )
 {
    ImageDownloadContext* context = (ImageDownloadContext*) context_cb;
 

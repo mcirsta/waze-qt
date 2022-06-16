@@ -167,8 +167,8 @@ static int RoadMapGpsProtocol = ROADMAP_GPS_NONE;
 
 #define GET_2_DIGIT_STRING( num_in, str_out ) \
 { \
-	str_out[0] = '0'; \
-    sprintf( &str_out[(num_in < 10)], "%d", num_in ); \
+str_out[0] = '0'; \
+sprintf( str_out, "%1d", (uint8_t)(num_in%100)); \
 }
 
 /* Listeners information (navigation data) ----------------------------- */

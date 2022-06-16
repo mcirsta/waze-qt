@@ -44,6 +44,7 @@
 #include "../roadmap_foursquare.h"
 #include "../roadmap_scoreboard.h"
 #include "../navigate/navigate_main.h"
+#include "../navigate/navigate_route_trans.h"
 #include "../ssd/ssd_dialog.h"
 #include "../ssd/ssd_keyboard_dialog.h"
 #include "../ssd/ssd_confirm_dialog.h"

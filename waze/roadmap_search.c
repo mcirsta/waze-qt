@@ -62,6 +62,7 @@
 #include "ssd/ssd_confirm_dialog.h"
 #include "ssd/ssd_keyboard_dialog.h"
 #include "ssd/ssd_separator.h"
+#include "ssd/ssd_popup.h"
 #include "Realtime/Realtime.h"
 
 #include "navigate/navigate_main.h"
@@ -134,7 +135,7 @@ static void add_home_work_dlg(int iType);
 #else
 extern void add_home_work_dlg(int iType);
 #endif
-static g_favorite_name;
+static const char* g_favorite_name;
 
 static void hide_our_dialogs( int exit_code)
 {
@@ -152,9 +153,12 @@ static char const *PopupMenuItems[] = {
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 static int on_next (SsdWidget widget, const char *new_value){
+    (void)widget;
+    (void)new_value;
    ssd_dialog_hide_current(dec_close);
    roadmap_start_popup_menu ("Show Address menu", PopupMenuItems,
                              NULL, NULL, DIALOG_ANIMATION_FROM_RIGHT);
+   return 0;
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////
 void show_address_popup(int category, address_info_ptr ai, RoadMapPosition position){
@@ -163,7 +167,7 @@ void show_address_popup(int category, address_info_ptr ai, RoadMapPosition posit
    int layers_count;
    RoadMapNeighbour neighbours[2];
    PluginStreetProperties properties;
-   char street_name[250];
+   char street_name[1000];
    char city_name[250];
    RoadMapPosition context_save_pos;
    zoom_t context_save_zoom;
@@ -209,8 +213,8 @@ void show_address_popup(int category, address_info_ptr ai, RoadMapPosition posit
    else if (category == 'A'){
       if (ai->name && *ai->name){
          icon = local_search_get_icon_name();
-         strncat(street_name,",", sizeof(street_name));
-         strncat(street_name,city_name,sizeof(street_name));
+         strncat(street_name,",", sizeof(street_name) - strlen(street_name) - 1);
+         strncat(street_name,city_name, sizeof(street_name) - strlen(street_name) - 1);
          strcpy(city_name, ai->name);
       }
       else
@@ -709,6 +713,7 @@ static int on_option_selected (SsdWidget widget, const char *new_value, const vo
 
      case search_menu_add_geo_reminder:
         on_add_to_geo_reminder(context);
+       break;
 
      case search_menu_cancel:
         s_context_menu_is_active = FALSE;
@@ -1125,7 +1130,7 @@ void roadmap_search_history (char category, const char *title) {
    SsdWidget text;
    static char *labels[MAX_HISTORY_ENTRIES];
    static void *values[MAX_HISTORY_ENTRIES];
-   static char *icons[MAX_HISTORY_ENTRIES];
+   static const char *icons[MAX_HISTORY_ENTRIES];
    static int count = -1;
    void *history;
    void *prev;
@@ -1985,6 +1990,8 @@ static SsdWidget create_additional_search_container(){
     return search_container;
 }
 static void on_search_dlg_close (int exit_code, void* context){
+   (void)exit_code;
+   (void)context;
    roadmap_native_keyboard_hide();
 }
 

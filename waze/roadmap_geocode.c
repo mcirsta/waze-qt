@@ -117,6 +117,7 @@ int roadmap_geocode_address (RoadMapGeocode **selections,
          RoadMapGeocodeLastErrorString =
             roadmap_lang_get ("No street with that name could be found");
          RoadMapGeocodeLastErrorCode = geo_error_no_street;
+         break;
       default:
          RoadMapGeocodeLastErrorString =
             roadmap_lang_get ("The address could not be found");

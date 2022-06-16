@@ -43,6 +43,7 @@
 #include <ctype.h>
 
 #include "roadmap.h"
+#include "roadmap_bar.h"
 #include "roadmap_square.h"
 #include "roadmap_state.h"
 #include "roadmap_config.h"
@@ -635,7 +636,7 @@ void roadmap_math_project (RoadMapGuiPoint *point) {
     * distance from the center goes to infinity */
    point->y = (short) (RoadMapContext.height -
                (DistFromCenterY * VisibleRange) /
-                        (abs(DistFromCenterY) + VisibleRange));
+                        (labs(DistFromCenterY) + VisibleRange));
 
    /* X distance from center of the screen */
    DistFromCenterX = point->x - RoadMapContext.width / 2;
@@ -2053,7 +2054,7 @@ int roadmap_math_screen_intersect (RoadMapGuiPoint *f1, RoadMapGuiPoint *t1,
    if (a1 == a2) return 0;
 
    x = (b1 - b2) / (a2 - a1);
-   if (abs(a1) < abs(a2)) {
+   if (labs(a1) < labs(a2)) {
       isect->y = (b1 + x * a1) / 1024;
    } else {
       isect->y = (b2 + x * a2) / 1024;

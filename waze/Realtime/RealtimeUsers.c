@@ -171,8 +171,8 @@ BOOL RTUsers_Add( LPRTUsers this, LPRTUserLocation pUser)
       return FALSE;
 
    if (pUser->sGroupIcon[0] != 0){
-      char temp[RT_USER_GROUP_ICON_MAXSIZE];
-      snprintf(temp, RT_USER_GROUP_ICON_MAXSIZE, "wazer_%s", pUser->sGroupIcon);
+      char temp[RT_USER_GROUP_ICON_MAXSIZE+10];
+      snprintf(temp, RT_USER_GROUP_ICON_MAXSIZE+10, "wazer_%s", pUser->sGroupIcon);
       strcpy(pUser->sGroupIcon, temp);
       if (roadmap_res_get(RES_BITMAP,RES_SKIN, pUser->sGroupIcon) == NULL){
          roadmap_res_download(RES_DOWNLOAD_IMAGE, pUser->sGroupIcon,NULL, "",FALSE, 0, NULL, NULL );
@@ -204,8 +204,8 @@ BOOL RTUsers_Update( LPRTUsers this, LPRTUserLocation pUser)
 
    pUser->bShowGroupIcon = pUI->bShowGroupIcon;
    if (pUser->sGroupIcon[0] != 0){
-       char temp[RT_USER_GROUP_ICON_MAXSIZE];
-       snprintf(temp, RT_USER_GROUP_ICON_MAXSIZE, "wazer_%s", pUser->sGroupIcon);
+       char temp[RT_USER_GROUP_ICON_MAXSIZE+10];
+       snprintf(temp, RT_USER_GROUP_ICON_MAXSIZE+10, "wazer_%s", pUser->sGroupIcon);
        strcpy(pUser->sGroupIcon, temp);
    }
    (*pUI) = (*pUser);
@@ -608,7 +608,7 @@ void RTUsers_Popup (LPRTUsers this, const char *id, int iCenterAround)
    SsdWidget button;
 #endif
 
-   char name[100];
+   char name[110];
    char title[100];
    char rates[200];
    char joined[200];

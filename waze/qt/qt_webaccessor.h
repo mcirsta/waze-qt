@@ -53,7 +53,7 @@ Q_OBJECT
 public:
     static WazeWebAccessor& getInstance();
 
-    HttpAsyncContext *postRequestParser(int flags,
+    void postRequestParser(int flags,
                      const char* action,
                      wst_parser parsers[],
                      int parser_count,
@@ -61,7 +61,7 @@ public:
                      LPRTConnectionInfo pci,
                      const QString &data);
 
-    HttpAsyncContext * postRequestParser(
+    void postRequestParser(
                       QString address,
                       int flags,
                       const char *action,
@@ -72,7 +72,7 @@ public:
                       QString contentType,
                       const QString &data);
 
-    HttpAsyncContext * postRequestProgress(QString url, int flags, RoadMapHttpAsyncCallbacks *callbacks, void *context, const char* header, const void* data, int data_length);
+    bool postRequestProgress(QString url, int flags, RoadMapHttpAsyncCallbacks *callbacks, void *context, const char* header, const void* data, int data_length);
     HttpAsyncContext * getRequest(QString url, int flags, RoadMapHttpAsyncCallbacks *callbacks, time_t update_time, void* context);
 
     void setV2Suffix(QString suffix);

@@ -181,7 +181,7 @@ static void editor_bar_after_refresh (void) {
    RoadMapGuiPoint position;
    int allign;
    RoadMapImage RecordUpImage = NULL;
-   char msg[120];
+   char msg[121];
    int distance_far;
    char str[100];
    char unit_str[20];
@@ -256,9 +256,10 @@ static void editor_bar_after_refresh (void) {
       int tenths = roadmap_math_to_trip_distance_tenths(length);
       if (distance_far < 50)
          snprintf (str, sizeof(str), "%d.%d", distance_far, tenths % 10);
-      else
+      else {
          snprintf (str, sizeof(str), "%d", distance_far);
          snprintf (unit_str, sizeof(unit_str), "%s", roadmap_lang_get(roadmap_math_trip_unit()));
+      }
    } else {
       if (!roadmap_math_is_metric()){
          int tenths = roadmap_math_to_trip_distance_tenths(length);

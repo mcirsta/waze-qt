@@ -124,7 +124,7 @@
 
 #define MAX_MINUTES_TO_RESUME_NAV   120
 
-#define MAX_ALT_ROUTES 3
+#define MAX_ALT_ROUTES_MAIN 3
 
 static RoadMapConfigDescriptor NavigateConfigRouteColor =
                     ROADMAP_CONFIG_ITEM("Navigation", "RouteColor");
@@ -188,7 +188,7 @@ int NavigateEnabled = 0;
 int NavigatePluginID = -1;
 static int NavigateTrackEnabled = 0;
 static int NavigateDisplayALtRoute = 0;
-static int NavigateAltId[MAX_ALT_ROUTES] = {-1, -1, -1};
+static int NavigateAltId[MAX_ALT_ROUTES_MAIN] = {-1, -1, -1};
 static int NavigateDisplayedAltId = 0;
 static int NavigateTrackFollowGPS = 0;
 static BOOL CalculatingRoute = FALSE;
@@ -232,7 +232,7 @@ static time_t NavigateRerouteTime = 0;
 static int NavigateLength;
 static int NavigateTrackTime;
 static const char *BackToRouteMessage = "Proceed to highlighted route";
-RoadMapGpsPosition NavigateLatestGpsPosition = {0, 0, 0, -1, INVALID_STEERING};
+RoadMapGpsPosition NavigateLatestGpsPosition = {0, 0, 0, -1, INVALID_STEERING, -1};
 int                NavigateLatestCompass = -1;
 
 static void navigate_main_compass_update (int magnetic_heading);
@@ -284,8 +284,8 @@ static PluginLine NavigateFromLineLast = PLUGIN_LINE_NULL;
 static int NavigateFromPointPending = -1;
 static int NavigateFromPointLast = -1;
 static BOOL gETATimerActive = FALSE;
-static RoadMapPosition *NavigateOutlinePoints[MAX_ALT_ROUTES];
-static int NavigateNumOutlinePoints[MAX_ALT_ROUTES] = {0,0,0};
+static RoadMapPosition *NavigateOutlinePoints[MAX_ALT_ROUTES_MAIN];
+static int NavigateNumOutlinePoints[MAX_ALT_ROUTES_MAIN] = {0,0,0};
 
 static RoadMapPosition *NavigateOriginalRoutePoints = NULL;
 static int NavigateNumOriginalRoutePoints = 0;
@@ -1018,17 +1018,17 @@ static void navigate_display_street (int isegment) {
 		if (!segment->is_instrumented) break;
 		navigate_main_get_plugin_line (&segment_line, segment);
       roadmap_plugin_get_street_properties (&segment_line, &properties, 0);
-      if (properties.street && properties.street[0] ||
-          prev_segment && prev_segment->dest_name) break;
+      if ((properties.street && properties.street[0]) ||
+          (prev_segment && prev_segment->dest_name)) break;
       isegment++;
 	}
 
 	if (isegment >= num_segments) return;
 
    if (segment->is_instrumented ||
-       prev_segment && prev_segment->dest_name) {
+       (prev_segment && prev_segment->dest_name)) {
       if (segment->is_instrumented && segment->instruction == APPROACHING_DESTINATION){
-         char title[256];
+         char title[1000];
          title[0] = 0;
          if ((NavigateDestStreet[0] != 0) && (NavigateDestStreetNumber[0] != 0))
             if (ssd_widget_rtl(NULL)){
@@ -1131,7 +1131,7 @@ static void navigate_main_format_messages (void) {
    roadmap_message_set ('D', "%s %s", str, unit_str);
 #ifndef QTMOBILITY
    if (!showETA){
-#endif QTMOBILITY
+#endif //QTMOBILITY
  		sprintf (str, "%d %s", ETA /60, roadmap_lang_get("min."));
 #ifndef QTMOBILITY
  		roadmap_message_unset('@');
@@ -1199,7 +1199,7 @@ BOOL navigate_main_drive_on_left(void){
 }
 
 char *navigate_main_get_dest_str(void){
-   static char title[256];
+   static char title[1000];
 
    title[0] = 0;
    if ((NavigateDestName[0] != 0))
@@ -1214,7 +1214,7 @@ char *navigate_main_get_dest_str(void){
 }
 
 static void navigate_show_message (void) {
-   char title[256];
+   char title[1000];
    if ((NavigateDestName[0] != 0))
       snprintf (title, sizeof(title), "%s", NavigateDestName);
    else if ((NavigateDestStreet[0] != 0) && (NavigateDestCity[0] != 0))
@@ -1886,7 +1886,7 @@ void navigate_update (RoadMapPosition *position, PluginLine *current, int speed,
    int i;
    int group_id;
    const char *inst_text = "";
-   char *inst_voice = NULL;
+   const char *inst_voice = NULL;
    const char *inst_roundabout = NULL;
    int roundabout_exit = 0;
    RoadMapSoundList sound_list;
@@ -3192,7 +3192,7 @@ void navigate_main_prepare_for_request (void) {
 
 
 static void recalc_alt_route(void){
-   const RoadMapPosition *from;
+   RoadMapPosition *from = NULL;
    RoadMapGpsPosition pos;
    RoadMapPosition to;
    AltRouteTrip route;
@@ -3201,7 +3201,9 @@ static void recalc_alt_route(void){
 
    RealtimeAltRoutes_Clear();
    if (roadmap_navigate_get_current (&pos, &line, &direction) != -1) {
-         from = &pos;
+         from = roadmap_allocate_and_check(sizeof(RoadMapPosition));
+         from->latitude = pos.latitude;
+         from->longitude = pos.longitude;
    } else {
      if ( roadmap_gps_have_reception() )
      {
@@ -3285,7 +3287,7 @@ int navigate_main_calc_route ( int add_flags  /* additional flags */ ) {
 
    navigate_cost_reset ();
 
-   for (i = 0; i < MAX_ALT_ROUTES; i++)
+   for (i = 0; i < MAX_ALT_ROUTES_MAIN; i++)
       NavigateNumOutlinePoints[i] = 0;
 
    if (RealTimeLoginState ()) {
@@ -3478,7 +3480,7 @@ void navigate_main_draw_route_number(void){
       return;
    }
 
-   for (i = 0; i < MAX_ALT_ROUTES; i++){
+   for (i = 0; i < MAX_ALT_ROUTES_MAIN; i++){
       if (NavigateAltId[i] != -1)
          count++;
    }
@@ -3487,7 +3489,7 @@ void navigate_main_draw_route_number(void){
     roadmap_canvas3_set3DMode(OGL_3Dmode);
 #endif// VIEW_MODE_3D_OGL
 
-   for (i = MAX_ALT_ROUTES - 1; i >= 0; i--){
+   for (i = MAX_ALT_ROUTES_MAIN - 1; i >= 0; i--){
       if (NavigateAltId[i] != -1){
          NavigateDisplayedAltId = i;
          navigate_main_screen_outline ();
@@ -4148,7 +4150,7 @@ void navigate_main_list(void){
 		   Nextsegment = navigate_segment (segment_idx + 1);
 		   if (segment_idx == num_segments - 1 ||
 		   	 segment->group_id != Nextsegment->group_id){
-		   	char str[100];
+            char str[500];
 		   	char dist_str[100];
 		   	char unit_str[20];
 		   	int distance_far;
@@ -4362,7 +4364,7 @@ int seconds = 0;
 timeStruct curTimeOnPhone;
 #ifdef J2ME
    // how do you find the time in J2ME?
-#elif defined (QTMOBILITY)
+#elif defined (USE_QT)
     time_s current_time = roadmap_time_get_current();
 
     hours = current_time.hour;

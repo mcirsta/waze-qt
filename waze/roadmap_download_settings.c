@@ -34,6 +34,7 @@
 #include "Realtime/Realtime.h"
 #include "roadmap_map_settings.h"
 #include "roadmap_map_download.h"
+#include "roadmap_tile_manager.h"
 #include <string.h>
 
 #ifdef IPHONE

@@ -63,6 +63,7 @@
 #include "../roadmap_groups.h"
 #include "../roadmap_message_ticker.h"
 #include "../roadmap_analytics.h"
+#include "../roadmap_tile.h"
 
 #include "RealtimeAlerts.h"
 #include "RealtimeAlertsList.h"
@@ -784,11 +785,11 @@ BOOL RTAlerts_Add(RTAlert *pAlert)
 
 
     if (pAlert->sAddOnName[0] != 0){
-       char temp_addon[RT_ALERTS_MAX_ADD_ON_NAME];
-       snprintf(temp_addon, RT_ALERTS_MAX_ADD_ON_NAME, "%s%s", ALERT_PIN_ADDON_PREFIX, pAlert->sAddOnName);
+       char temp_addon[RT_ALERTS_MAX_ADD_ON_NAME+100];
+       snprintf(temp_addon, RT_ALERTS_MAX_ADD_ON_NAME+100, "%s%s", ALERT_PIN_ADDON_PREFIX, pAlert->sAddOnName);
        gAlertsTable.alert[gAlertsTable.iCount]->pMapAddOnName = strdup(temp_addon);
 
-       snprintf(temp_addon, RT_ALERTS_MAX_ADD_ON_NAME, "%s%s", ALERT_ICON_ADDON_PREFIX, pAlert->sAddOnName);
+       snprintf(temp_addon, RT_ALERTS_MAX_ADD_ON_NAME+100, "%s%s", ALERT_ICON_ADDON_PREFIX, pAlert->sAddOnName);
        gAlertsTable.alert[gAlertsTable.iCount]->pMenuAddOnName = strdup(temp_addon);
     }
 
@@ -860,7 +861,8 @@ BOOL RTAlerts_Add(RTAlert *pAlert)
     }
 
     if (pAlert->sNearStr[0] != 0){
-    	sprintf (gAlertsTable.alert[gAlertsTable.iCount]->sLocationStr + strlen(gAlertsTable.alert[gAlertsTable.iCount]->sLocationStr), " %s %s", 			roadmap_lang_get("Near"), pAlert->sNearStr);
+        sprintf (gAlertsTable.alert[gAlertsTable.iCount]->sLocationStr + strlen(gAlertsTable.alert[gAlertsTable.iCount]->sLocationStr), " %s %s",
+                roadmap_lang_get("Near"), pAlert->sNearStr);
     }
 
 
@@ -1488,9 +1490,9 @@ const char * RTAlerts_Get_Icon(int alertId)
     RTAlert *pAlert;
 
     pAlert = RTAlerts_Get_By_ID(alertId);
-    if (pAlert == NULL)
+    if (pAlert == NULL) {
         return NULL;
-
+    }
 	return RTAlerts_Get_IconByType(pAlert, pAlert->iType, (pAlert->iNumComments != 0));
 }
 
@@ -2879,9 +2881,9 @@ static void RTAlerts_Popup(void)
 
 }
 
-char *getHazardStr(int subtype){
+const char *getHazardStr(int subtype){
    static char temp[20];
-   char *str;
+   const char *str;
    RoadMapConfigDescriptor param;
    param.category = "Hazard";
    sprintf(temp, "%d", subtype);
@@ -3209,8 +3211,9 @@ void RTAlerts_get_report_info_str( RTAlert *pAlert, char* buf, int buf_len )
      buf[0] = 0;
   	 if ( pAlert->iType == RT_ALERT_TYPE_TRAFFIC_INFO )
   		tmpStr = roadmap_lang_get("Updated ");
-    else
+    else {
     	tmpStr = roadmap_lang_get("");
+     }
 
   	snprintf( buf, buf_len, "%s", tmpStr );
 
@@ -3668,7 +3671,7 @@ void RTAlerts_update_location_str(RTAlert *pAlert){
      }
 
      if (pAlert->sNearStr[0] != 0){
-        sprintf (pAlert->sLocationStr + strlen(pAlert->sLocationStr), " %s %s",  roadmap_lang_get("Near"), pAlert->sNearStr);
+        snprintf (pAlert->sLocationStr + strlen(pAlert->sLocationStr), sizeof(pAlert->sLocationStr)- strlen(pAlert->sLocationStr), " %s %s",  roadmap_lang_get("Near"), pAlert->sNearStr);
      }
    }
 
@@ -4836,9 +4839,9 @@ static BOOL on_keyboard_closed(  int         exit_code,
 #ifdef IPHONE
 	roadmap_main_show_root(0);
 #endif //IPHONE
-    if( dec_ok != exit_code)
+    if( dec_ok != exit_code) {
         return TRUE;
-
+    }
 	if ((AlertContext->iType == RT_ALERT_TYPE_CHIT_CHAT) &&  (value[0] == 0)){
 		return FALSE;
 	}
@@ -5322,9 +5325,9 @@ static BOOL post_comment_keyboard_callback(int         exit_code,
     BOOL success;
     RTAlert *pAlert = (RTAlert *)context;
 
-    if( dec_ok != exit_code)
+    if( dec_ok != exit_code) {
         return TRUE;
-
+    }
 	if (value[0] == 0)
 		return FALSE;
 
@@ -5908,7 +5911,7 @@ static void RTAlerts_ThumbsUp_PopUp(ThumbsUp *thumbsUp)
     ssd_widget_set_color(text,"#f6a201", NULL);
     ssd_widget_add(text_con, text);
 
-    if (thumbsUp->sFacebookName && thumbsUp->sFacebookName[0] != 0){
+    if (thumbsUp->sFacebookName[0] != 0){
        snprintf(ThumbsUpStr, sizeof(ThumbsUpStr) , "(%s)", thumbsUp->sFacebookName);
        text = ssd_text_new ("FacebookUsername Str", ThumbsUpStr, 18,SSD_END_ROW );
        ssd_widget_set_color(text,"#f6a201", NULL);
@@ -6157,7 +6160,7 @@ void AlertAheadDlgDisplay(RTAlert *pAlert){
    int image_container_width = ADJ_SCALE(52);
    char *icon[3];
    char DistanceStr[100];
-   char TextStr[100];
+   char TextStr[200];
    int width = roadmap_canvas_width();
 
    gCurrentAlertId =pAlert->iID;
@@ -7479,7 +7482,7 @@ static   SsdWidget CheckboxTypeOfError[MAX_MAP_PROBLEM_COUNT];
 static int map_error_buttons_callback (SsdWidget widget, const char *new_value) {
 
    SsdWidget container = widget->parent;
-   char type[3];
+   char type[12];
 
    BOOL success;
    if (!strcmp(widget->name, "Send")){

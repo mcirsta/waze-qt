@@ -132,8 +132,11 @@
 #include "Realtime/RealtimeExternalPoi.h"
 #include "roadmap_speedometer.h"
 #include "roadmap_recommend.h"
+#include "roadmap_net_mon.h"
 #include "tts_apptext.h"
 #include "tts/tts.h"
+#include "roadmap_search.h"
+#include "roadmap_recorder.h"
 
 #ifdef SSD
 #include "ssd/ssd_widget.h"
@@ -2678,7 +2681,7 @@ static void roadmap_gps_update
 
       roadmap_trip_set_point( "Location", (const RoadMapPosition*) gps_position );
       roadmap_navigate_locate (gps_position, gps_time);
-      navigate_main_set_gps (gps_position);
+      navigate_main_set_gps (*gps_position);
 
       roadmap_log_reset_stack ();
 

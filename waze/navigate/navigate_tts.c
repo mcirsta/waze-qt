@@ -130,7 +130,7 @@ static const char* _get_full_instruction( const NavTtsState* state );
 static NavSmallValue _get_state_instruction( const NavTtsState* state );
 static int _prepare_nav_voice( const char* voice_id );
 static const char* _get_destination_name( const char* street, const char* street_num );
-INLINE_DEC _format_street_text( const char* street_name, BOOL add_at, char buf_out[], int buf_size );
+INLINE_DEC void _format_street_text( const char* street_name, BOOL add_at, char buf_out[], int buf_size );
 
 void navigate_tts_initialize( void )
 {
@@ -1115,7 +1115,7 @@ static NavSmallValue _get_state_instruction( const NavTtsState* state )
  * buf_out will contain street related text
  * Auxiliary
  */
-INLINE_DEC _format_street_text( const char* street_name, BOOL add_at, char buf_out[], int buf_size )
+INLINE_DEC void _format_street_text( const char* street_name, BOOL add_at, char buf_out[], int buf_size )
 {
    if ( add_at )
       snprintf( buf_out, buf_size, "%s %s", NAV_TTS_TEXT_AT, _parse_nav_text( street_name ) );

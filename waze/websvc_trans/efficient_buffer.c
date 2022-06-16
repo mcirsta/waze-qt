@@ -44,6 +44,7 @@ char* ebuffer_alloc( ebuffer_ptr this, int size)
    // Else
    s_DynamicAllocationsCount++;
    this->dynamic_buffer = malloc( size);
+   memset( this->dynamic_buffer , 0, size);
    
    if(this->dynamic_buffer)
       this->size = size;

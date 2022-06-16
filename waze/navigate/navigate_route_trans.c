@@ -1973,7 +1973,7 @@ void navigate_route_request (const PluginLine *from_line,
 	}/*AviR: debug else if (RoutingContext.num_retries == 0) {
       RoutingContext.flags |= RETRY_ROUTE_REQUEST;
       roadmap_main_set_periodic(1200, navigate_route_retry_periodic);
-   }/*AviR: end_debug*/
+   }AviR: end_debug*/
 }
 
 void navigate_route_on_response_error (void) {

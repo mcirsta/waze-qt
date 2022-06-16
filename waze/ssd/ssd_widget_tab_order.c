@@ -503,6 +503,7 @@ neighbour_location_type get_neighbour_location_type( SsdWidget this, SsdWidget o
 //    1. On which side of 'this' is 'other' located
 //    2. What is the location type (parallel, overlapping...)
 //    2. How far is it (h-distance + v-distance)
+#ifdef unused
 static relative_position get_relative_position(
          SsdWidget this, SsdWidget other)
 {
@@ -558,7 +559,7 @@ static relative_position get_relative_position(
       vdir = nd_above;
 
    if ((this->position.x == 0) && (this->position.y == 0) && (other->position.x == 0) && (other->position.y == 0)){
-      pos.type    = nd_none;
+      pos.type    = nlt_invalid;
       pos.distance= 0;
       return pos;
    }
@@ -584,6 +585,7 @@ static relative_position get_relative_position(
 
    return pos;
 }
+#endif
 
 static SsdWidget* get_dir_pointer( SsdWidget w, neighbour_direction dir)
 {
@@ -609,6 +611,7 @@ static SsdWidget* get_oposite_dir_pointer( SsdWidget w, neighbour_direction dir)
    }
 }
 
+#ifdef unused
 static BOOL select_nearest_neighbour(
                   SsdWidget            this,
                   SsdWidget            new,
@@ -666,6 +669,7 @@ static BOOL select_nearest_neighbour(
    return TRUE;
 }
 
+
 static void consider_a_neighbour( SsdWidget this, SsdWidget other)
 {
    relative_position pos = get_relative_position( this, other);
@@ -688,6 +692,7 @@ static void consider_a_neighbour( SsdWidget this, SsdWidget other)
    select_nearest_neighbour( this, other, pos);
 #endif   // DEBUG_GUI_TAB_ORDER
 }
+#endif
 
 // Helper for 'ssd_widget_sort_gui_tab_order__fix_orphan_pointers()' below
 void ssd_widget_sort_gui_tab_order__fix_corners( SsdWidget w, neighbour_direction dir)

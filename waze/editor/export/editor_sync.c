@@ -74,7 +74,7 @@ static char SyncUploadMessages[MAX_MSGS][MAX_SIZEOF_RESPONSE_MSG];
 static char SyncProgressLabel[100];
 
 static int upload_file_size_callback( void *context, size_t aSize );
-static void upload_progress_callback(void *context, char *data, size_t size);
+static void upload_progress_callback(void *context, const char *data, size_t size);
 static void upload_error_callback( void *context, int connection_failure, const char *format, ...);
 static void upload_done( void *context, char *last_modified, const char *format, ... );
 
@@ -399,7 +399,7 @@ static int upload_file_size_callback( void *context, size_t aSize ) {
 	return 1;
 }
 
-static void upload_progress_callback(void *context, char *data, size_t size) {
+static void upload_progress_callback(void *context,const char *data, size_t size) {
    SyncProgressLoaded += size;
 }
 

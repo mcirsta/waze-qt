@@ -370,7 +370,7 @@ static void roadmap_bar_decode_condition
 
    object->condition_fn[object->num_conditions] = roadmap_state_find (arg);
 
-   if (!object->condition_fn) {
+   if (!object->condition_fn[object->num_conditions]) {
       roadmap_log (ROADMAP_ERROR,
                   "roadmap bar:'%s' can't find condition indicator.",
                   object->name);
@@ -854,11 +854,12 @@ void draw_objects(BarObjectTable_s *table){
       					TextLocation.x = ObjectLocation.x + roadmap_canvas_image_width( image )/2;
       					TextLocation.y = ObjectLocation.y + roadmap_canvas_image_height( image )/2;
       				}
-      				else
+                    else {
 						roadmap_bar_pos(table->object[i], &TextLocation);
   						roadmap_canvas_draw_string_size (&TextLocation,
        			    			                    text_flag,
            			    			                font_size,(*table->object[i]->bar_text->bar_text_fn)());
+                    }
       			}
 			}
 			else{
@@ -867,11 +868,12 @@ void draw_objects(BarObjectTable_s *table){
       				TextLocation.x = ObjectLocation.x + roadmap_canvas_image_width( image )/2;
       				TextLocation.y = ObjectLocation.y + roadmap_canvas_image_height( image )/2 -2;
 				}
-				else
+                else {
 					roadmap_bar_pos(table->object[i], &TextLocation);
   					roadmap_canvas_draw_string_size (&TextLocation,
        		    				                    text_flag,
        			    				                font_size,(*table->object[i]->bar_text->bar_text_fn)());
+                }
 			}
     	}
     	if (table->object[i]->fixed_text){
@@ -988,13 +990,14 @@ int roadmap_bar_drag_motion (RoadMapGuiPoint *point)
         new_bar_object = roadmap_bar_by_pos(point, &TopBarObjectTable);
 
    if (!new_bar_object) {
-      if ( !gHideBottomBar )
+      if ( !gHideBottomBar ) {
         new_bar_object = roadmap_bar_by_pos(point, &BottomBarObjectTable);
         if (!new_bar_object){
            SelectedBarObject->image_state = IMAGE_STATE_NORMAL;
            roadmap_screen_redraw();
            return 1;
         }
+      }
    }
 
    if (new_bar_object != SelectedBarObject){
@@ -1051,13 +1054,14 @@ int roadmap_bar_obj_released (RoadMapGuiPoint *point)
           new_bar_object = roadmap_bar_by_pos(point, &TopBarObjectTable);
 
        if (!new_bar_object) {
-         if ( !gHideBottomBar )
+         if ( !gHideBottomBar ) {
             new_bar_object = roadmap_bar_by_pos(point, &BottomBarObjectTable);
             if (!new_bar_object){
                SelectedBarObject = NULL;
                roadmap_screen_redraw();
                return 0;
             }
+         }
        }
        if (new_bar_object != SelectedBarObject){
           SelectedBarObject = NULL;

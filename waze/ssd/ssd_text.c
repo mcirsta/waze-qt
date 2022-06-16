@@ -31,6 +31,7 @@
 #include "roadmap.h"
 #include "roadmap_canvas.h"
 #include "roadmap_res.h"
+#include "roadmap_utf8.h"
 #include "../roadmap_phone_keyboard.h"
 #include "../roadmap_strings.h"
 #include "../roadmap_keyboard_text.h"
@@ -288,8 +289,8 @@ static int format_text (SsdWidget widget, int draw,
                 }
                 else
                 {
-                   int utf8Len = utf8_strlen(line);
-                   int iLen = strlen(line);
+                   uint utf8Len = utf8_strlen(line);
+                   uint iLen = strlen(line);
                    if (utf8Len != iLen){
                          while (utf8Len > new_len/2){
                                utf8_remove_last_char(line);

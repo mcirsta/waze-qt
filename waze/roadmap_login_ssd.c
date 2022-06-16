@@ -119,7 +119,9 @@ static RoadMapConfigDescriptor RoadMapConfigCarName =
 
 //======= Local interface ========
 static void create_dialog();
+#ifdef unused
 static BOOL next_btn_callback( int         exit_code, const char* value, void*       context );
+#endif
 static BOOL validate_login_data( const char *username, const char* password, const char* confirm_password, const char* nickname, const char* email );
 static int on_update( SsdWidget this, const char *new_value );
 static int on_create( SsdWidget this, const char *new_value );
@@ -1389,6 +1391,7 @@ static BOOL validate_login_data( const char *username, const char* password, con
  *              : [out]
  *  Notes       :
  */
+#ifdef unused
 static BOOL next_btn_callback( int         exit_code,
 							   const char* value,
 							   void*       context )
@@ -1422,6 +1425,7 @@ static BOOL next_btn_callback( int         exit_code,
 
 	return retVal;
 }
+#endif
 
 /***********************************************************
  *  Name        : Device event handler

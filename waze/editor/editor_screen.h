@@ -48,11 +48,14 @@ void editor_screen_reset_selected (void);
 void editor_screen_select_line (const PluginLine *line);
 void report_accident_at_screen_point(void);
 void report_accident_opposite_side_at_screen_point(void);
+void editor_screen_menu(char *name);
+
 
 int editor_screen_show_candidates (void);
 
 int editor_screen_gray_scale(void);
 char *editor_screen_overide_car();
 void editor_screen_set_override_car(const char *name);
+void editor_screen_selection_menu(void);
 #endif // INCLUDE__EDITOR_SCREEN__H
 

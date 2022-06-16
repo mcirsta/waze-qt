@@ -1066,7 +1066,6 @@ BOOL RTNet_NodePath( LPRTConnectionInfo   pCI,
 
    NodePathBuffer = ebuffer_alloc( &Packet, RTNET_GPSPATH_BUFFERSIZE__dynamic(count));
 
-   memset( NodePathBuffer, 0, sizeof(NodePathBuffer));
    sprintf( NodePathBuffer, "NodePath,%d,", (unsigned int)period_begin);//(period_end-period_begin));
    sprintf( temp, "%d", 2 * count);
    strcat( NodePathBuffer, temp);
@@ -1131,7 +1130,6 @@ BOOL  RTNet_ExternalPoiDisplayed(     LPRTConnectionInfo   pCI,
       return FALSE;
 
    PoisBuffer = ebuffer_alloc( &Packet, RTNET_EXTERNALPOIDISPLAYED_BUFFERSIZE__dynamic(iPoiCount));
-   memset( PoisBuffer, 0, sizeof(PoisBuffer));
    sprintf(PoisBuffer,"NotifyExternalPoiDisplayed,%d", iPoiCount);
 
    for (i = 0; i < iPoiCount; i++){

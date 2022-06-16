@@ -595,6 +595,7 @@ static int send_button_callback (SsdWidget widget, const char *new_value){
    return 1;
 }
 
+#ifdef unused
 static const char * get_type_label(int type){
    switch (type){
       case 2:
@@ -608,6 +609,7 @@ static const char * get_type_label(int type){
    }
 
 }
+#endif
 
 static const char * get_type_title(int type){
    switch (type){

@@ -44,14 +44,15 @@ void roadmap_speedometer_set_offset(int offset_y){
 
 }
 
-
+#ifdef unused
 /////////////////////////////////////////////////////////////////////
 static void after_refresh_callback (void){
 
 }
+#endif
 
 /////////////////////////////////////////////////////////////////////
-static void roadmap_speedometer_after_refresh (void){
+void roadmap_speedometer_after_refresh (void){
 
 }
 

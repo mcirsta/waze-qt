@@ -110,7 +110,7 @@ typedef struct tagFoursquareCheckin {
    char                       sScorePoints[ROADMAP_FOURSQUARE_SCORE_PT_MAX_SIZE +1];
 
    //Following address is created from the selected venue entries
-   char                       sAddress[ROADMAP_FOURSQUARE_ADDRESS_MAX_SIZE + 1 + ROADMAP_FOURSQUARE_CITY_MAX_SIZE + 1];
+   char                       sAddress[ROADMAP_FOURSQUARE_ADDRESS_MAX_SIZE + 2 + ROADMAP_FOURSQUARE_CITY_MAX_SIZE + 2];
 }  FoursquareCheckin;
 
 

@@ -209,7 +209,7 @@ static void update_progress (int progress) {
 
 #ifdef SSD
    {
-      char progress_str[10];
+      char progress_str[12];
 
       snprintf (progress_str, sizeof(progress_str), "%d", progress);
 

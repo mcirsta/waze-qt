@@ -150,7 +150,7 @@ BOOL tts_db_sqlite_store( const TtsDbEntry* entry, TtsDbDataStorageType storage_
    }
    if ( db_path )
    {
-       QVariant pathVar(QString(path));
+       QVariant pathVar{QString(path)};
        query.bindValue(2, pathVar);
       if ( !check_sqlite_error( "binding the path statement", query.lastError().type() == QSqlError::NoError ) )
       {

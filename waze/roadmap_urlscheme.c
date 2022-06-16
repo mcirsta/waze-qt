@@ -114,7 +114,7 @@ static void decode (char *txt) {
    if (strstr(p, URL_MAP_CENTER_STR) == p) { //<ll=lat,lon>
       char *lat;
       char *lon;
-      int comma_pos = strcspn(p, ",");
+      uint comma_pos = strcspn(p, ",");
       if (comma_pos < strlen(p)) {
          p[comma_pos] = 0;
          lat = p + strlen(URL_MAP_CENTER_STR);

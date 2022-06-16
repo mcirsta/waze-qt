@@ -25,12 +25,14 @@
 #ifndef INCLUDE__NAVIGATE_MAIN__H
 #define INCLUDE__NAVIGATE_MAIN__H
 
+#include "address_search/address_search_defs.h"
 #include "roadmap.h"
 #include "roadmap_canvas.h"
 #include "roadmap_plugin.h"
 #include "roadmap_screen.h"
 #include "roadmap_line.h"
 #include "roadmap.h"
+#include "roadmap_gps.h"
 
 typedef struct {
    int hours;
@@ -200,6 +202,7 @@ const RoadMapPosition *navigate_main_get_src_position(void);
 int navigate_main_alt_routes_display(void);
 int navigate_main_is_alt_routes(void);
 void navigate_main_set_dest_pos(RoadMapPosition *position);
+void navigate_main_set_src_pos(RoadMapPosition *position);
 void navigate_main_recalculate_route(void);
 void navigate_main_alt_recalculate_route(void);
 
@@ -212,5 +215,10 @@ BOOL navigate_main_drive_on_left(void);
 char *navigate_main_get_dest_str(void);
 
 int navigate_main_visible_route_scale(RoadMapPosition *pos);
+
+int main_navigator(  const RoadMapPosition *point,
+                     address_info_ptr       ai);
+void navigate_main_save_eta(void);
+void navigate_main_set_gps (RoadMapGpsPosition gps);
 #endif /* INCLUDE__NAVIGATE_MAIN__H */
 

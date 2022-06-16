@@ -87,7 +87,9 @@ static int roadmap_res_cache_add( RoadMapResource* res, int hash_key );
 static void roadmap_res_cache_set_MRU( RoadMapResource* res, int slot );
 
 static void dbg_cache( RoadMapResource* res, int slot, const char* name );
+#ifdef unused
 static void print_cache( RoadMapResource* res, const char* note );
+#endif
 static void allocate_resource (unsigned int type) {
    RoadMapResource *res = &Resources[type];
    res->res_type = type;
@@ -497,6 +499,7 @@ static void dbg_cache( RoadMapResource* res, int slot, const char* name )
 	}
 }
 
+#ifdef unused
 static void print_cache( RoadMapResource* res, const char* note )
 {
    int i;
@@ -511,3 +514,4 @@ static void print_cache( RoadMapResource* res, const char* note )
       next = cache[next].next;
    }
 }
+#endif

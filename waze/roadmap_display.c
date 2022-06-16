@@ -1061,11 +1061,13 @@ static void roadmap_display_console_box
 #endif
           frame[2].x = roadmap_canvas_width() ;
    		frame[0].x = frame[2].x - width - 4;
-    } else if (corner & ROADMAP_CANVAS_RIGHT) {
+    } else if (corner & ROADMAP_CANVAS_RIGHT)
 #ifdef TOUCH_SCREEN
        if (roadmap_horizontal_screen_orientation())
         frame[2].x = roadmap_canvas_width() - 5-offset;
-       else
+       else {
+#else
+        {
 #endif
         frame[2].x = roadmap_canvas_width() - 1 ;
         frame[0].x = frame[2].x - width - 6;
@@ -1118,8 +1120,9 @@ static void roadmap_display_console_box
        roadmap_canvas_select_pen (RoadMapConsoleForeground);
     }
 
-   if (type != ROADMAP_CONSOLE_WARNING )
-    roadmap_canvas_draw_multiple_polygons (1, &count, frame, 0, 0);
+    if (type != ROADMAP_CONSOLE_WARNING ) {
+        roadmap_canvas_draw_multiple_polygons (1, &count, frame, 0, 0);
+    }
 
     frame[0].x = frame[3].x - 3;
     frame[0].y = frame[3].y + 1;

@@ -1223,7 +1223,7 @@ void ssd_context_menu_show(int                  x,
       exit_context_menu(FALSE,NULL); // we only support one context menu open at a time.
    }
 
-   sprintf( s_dialog_name, "%s_0x%08X", SSD_CMDLG_DIALOG_NAME, (unsigned int) menu );
+   sprintf( s_dialog_name, "%s_0x%08lX", SSD_CMDLG_DIALOG_NAME, (intptr_t) menu );
 
    /*
     * Check the existence of the dialog. If the dialog doesn't exist (deallocated)

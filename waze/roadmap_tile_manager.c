@@ -178,7 +178,7 @@ static int  http_cb_size (void *context, size_t size) {
 	return size;
 }
 
-static void http_cb_progress (void *context, char *data, size_t size) {
+static void http_cb_progress (void *context,const char *data, size_t size) {
 
    ConnectionContext *conn = (ConnectionContext *)context;
 

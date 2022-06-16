@@ -95,7 +95,7 @@ typedef struct {
 } DownloadContext;
 
 static int download_size_callback (void *context_cb, size_t size);
-static void download_progress_callback (void *context_cb, char *data, size_t size);
+static void download_progress_callback (void *context_cb,const char *data, size_t size);
 static void download_error_callback (void *context_cb,
                int connection_failure,
                const char *format,
@@ -603,7 +603,7 @@ static int download_size_callback (void *context_cb, size_t size) {
 }
 
 //////////////////////////////////////////////////////////////////
-static void download_progress_callback (void *context_cb, char *data, size_t size) {
+static void download_progress_callback (void *context_cb,const char *data, size_t size) {
    DownloadContext* context = (DownloadContext*) context_cb;
 
    // Store data

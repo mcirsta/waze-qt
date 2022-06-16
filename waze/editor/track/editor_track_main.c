@@ -1351,8 +1351,9 @@ int editor_track_draw_new_direction_roads () {
             if (!roadmap_layer_is_visible (roadmap_line_cfcc(line_id), 0))
             	continue;
 
-            if (!roadmap_math_line_is_visible (&from, &to))
+            if (!roadmap_math_line_is_visible (&from, &to)) {
             	continue;
+            }
 
          	for (i = 0; i < LAYER_PROJ_AREAS; i++) {
       			layer_pens[i] = roadmap_layer_get_pen (roadmap_line_cfcc(line_id),1, i);

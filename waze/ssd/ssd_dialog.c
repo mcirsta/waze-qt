@@ -114,7 +114,9 @@ static SsdDialog RoadMapDialogCurrent = NULL;
 
 static SsdDialog ssd_dialog_get (const char *name) ;
 
+#ifdef maybe
 static void ssd_dialog_free_all( BOOL force );
+#endif
 static void ssd_dialog_align_focus_timeout( void );
 
 #ifdef OPENGL
@@ -438,7 +440,7 @@ static int ssd_dialog_short_click (RoadMapGuiPoint *point) {
 
 static int ssd_dialog_long_click (RoadMapGuiPoint *point) {
 
-   if (!LastPointerPoint.x < 0) {
+   if (!(LastPointerPoint.x < 0)) {
       SsdWidget container = RoadMapDialogCurrent->container;
       if (ssd_widget_find_by_pos (container, point, TRUE )) {
          return 1;
@@ -1847,6 +1849,7 @@ static void ssd_dialog_free_internal( SsdDialog dialog, BOOL force, BOOL update_
  *  Returns		:
  *  Notes       :
  */
+#ifdef maybe
 static void ssd_dialog_free_all( BOOL force )
 {
    SsdDialog next;
@@ -1861,6 +1864,7 @@ static void ssd_dialog_free_all( BOOL force )
 	   iterator = next;
    }
 }
+#endif
 
 /***********************************************************
  *  Name        : ssd_dialog_set_free

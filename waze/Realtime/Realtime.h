@@ -155,6 +155,7 @@ void Realtime_Relogin(void);
 int  Realtime_AddonState(void);
 void Realtime_ShowWazerNearby (void);
 int  Realtime_WazerNearbyState (void);
+void RemoveWazerNearby (void);
 
 void	RealTime_Auth (void);
 void RecommentToFriend(void);

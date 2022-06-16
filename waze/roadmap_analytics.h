@@ -146,4 +146,12 @@ void roadmap_analytics_clear(void);
 int  roadmap_analytics_count(void);
 BOOL roadmap_analytics_is_empty(void);
 
+const char *StatsTable_getEventName(int index);
+
+int StatsTable_getNumParams(int index);
+
+const char **StatsTable_getParamNames(int index);
+
+const char **StatsTable_getParamValues(int index);
+
 #endif //ROADMAP_ANALYTICS_H_

@@ -24,6 +24,7 @@
 #ifndef _ROADMAP_DBREAD__H_
 #define _ROADMAP_DBREAD__H_
 
+#include <stddef.h>
 #include "roadmap_data_format.h"
 
 typedef struct {

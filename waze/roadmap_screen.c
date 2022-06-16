@@ -1978,7 +1978,7 @@ static void roadmap_screen_draw_object (const char *name,
    RoadMapImage image;
    int i;
 
-   if ((sprite == NULL) && (image_count == 0) && (text_count == 0) || !is_visible || scale < 5)return; /* Not a visible object. */
+   if (((sprite == NULL) && (image_count == 0) && (text_count == 0)) || !is_visible || scale < 5)return; /* Not a visible object. */
    
    position.latitude = gps_position->latitude;
    position.longitude = gps_position->longitude;
@@ -3812,7 +3812,7 @@ int roadmap_screen_refresh (void) {
 
    roadmap_log_push ("roadmap_screen_refresh");
 
-   if (focus && roadmap_trip_is_focus_changed() ||
+   if ((focus && roadmap_trip_is_focus_changed()) ||
        roadmap_view_should_refresh()) {
 
       roadmap_screen_reset_delta ();

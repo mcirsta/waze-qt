@@ -11,18 +11,6 @@ qmldir.source = qt/qml
 
 DEPLOYMENTFOLDERS = datadir qmldir # file1 dir1
 
-symbian:TARGET.UID3 = 0xE6919A30
-
-# Smart Installer package's UID
-# This UID is from the protected range 
-# and therefore the package will fail to install if self-signed
-# By default qmake uses the unprotected range value if unprotected UID is defined for the application
-# and 0x2002CCCF value if protected UID is given to the application
-#symbian:DEPLOYMENT.installer_header = 0x2002CCCF
-
-# Allow network access on Symbian
-symbian:TARGET.CAPABILITY += NetworkServices ReadUserData LocalServices NetworkServices UserEnvironment Location ReadDeviceData
-
 # If your application uses the Qt Mobility libraries, uncomment
 # the following lines and add the respective components to the 
 # MOBILITY variable. 
@@ -38,8 +26,9 @@ linux {
     LIBS += -ldl -lrt -lssl -lcrypto
 }
 
-QMAKE_CFLAGS += -Wno-unused-result -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable
-QMAKE_CXXFLAGS += -Wno-unused-result -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-deprecated-copy
+QMAKE_CFLAGS += -Wno-unused-result -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-unused-function -Wno-char-subscripts -Wno-error=shift-negative-value \
+                 -Werror
+QMAKE_CXXFLAGS += -Wno-unused-result -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-deprecated-copy -Wno-error=class-memaccess -Werror
 
 SOURCES += \
     roadmap_tile.c \
@@ -687,15 +676,6 @@ INCLUDEPATH += $$PWD/qt
 DEPENDPATH += $$PWD/qt
 
 #unix:!macx:!symbian: PRE_TARGETDEPS += $$PWD/qt/libwazeqt.a
-
-
-maemo5 {
-    icon.files = waze.png
-    icon.path = /usr/share/icons/hicolor/64x64/apps
-    INSTALLS += icon
-}
-
-
 
 
 

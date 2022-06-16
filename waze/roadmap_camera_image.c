@@ -112,7 +112,7 @@ static RoadMapConfigDescriptor RMCfgCameraImageUrlPrefix =
 
 
 static int  download_size_callback( void *context_cb, size_t size );
-static void download_progress_callback( void *context_cb, char *data, size_t size );
+static void download_progress_callback(void *context_cb, const char *data, size_t size );
 static void download_error_callback( void *context_cb, int connection_failure, const char *format, ... );
 static void download_done_callback( void *context_cb, char *last_modified, const char *format, ...  );
 
@@ -125,7 +125,7 @@ static void download_cache_clear( void );
 
 
 static int upload_file_size_callback( void *context, size_t aSize );
-static void upload_progress_callback( void *context, char *data, size_t size);
+static void upload_progress_callback( void *context,const char *data, size_t size);
 static void upload_error_callback( void *context, int connection_failure, const char *format, ...);
 static void upload_done( void *context, char *last_modified, const char *format, ... );
 
@@ -261,7 +261,7 @@ static int  download_size_callback( void *context_cb, size_t size )
  *  Purpose     : Download callback: Progress
  *
  */
-static void download_progress_callback( void *context_cb, char *data, size_t size )
+static void download_progress_callback( void *context_cb,const char *data, size_t size )
 {
    DownloadContext* context = (DownloadContext*) context_cb;
 
@@ -458,8 +458,9 @@ int image_alert_async_callback( CameraImageCaptureContext* context, int res )
     if ( image_file->file )
       free( image_file->file );
 
-    free( data );
+    free( context->callback_data );
     free( context );
+    return 0;
 }
 
 #ifndef IPHONE_NATIVE
@@ -722,11 +723,13 @@ static void download_cache_clear( void )
 
 ///////////////////////////////////////////////////////
 static int upload_file_size_callback( void *context, size_t aSize ){
+    (void)context;
+    (void)aSize;
 	return 1; // no image is too big for sending.
 }
 
 ///////////////////////////////////////////////////////
-static void upload_progress_callback(void *context, char *data, size_t size) {
+static void upload_progress_callback(void *context,const char *data, size_t size) {
 }
 
 ///////////////////////////////////////////////////////

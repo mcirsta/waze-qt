@@ -396,7 +396,7 @@ static const TtsVoice* _tts_voice( void )
    static TtsVoice voice = TTS_VOICE_INITIALIZER;
 
    // Check if voice was changed
-   if ( !voice.voice_id || strcmp( voice.voice_id, sgTtsCache.voice_id ) )
+   if ( strcmp( voice.voice_id, sgTtsCache.voice_id ) )
       tts_voices_get( sgTtsCache.voice_id, &voice );
 
    return &voice;

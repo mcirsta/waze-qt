@@ -428,6 +428,7 @@ int ssd_list_long_click (SsdWidget widget, const RoadMapGuiPoint *point) {
    return 0;
 }
 
+#ifdef unused
 static int delete_callback (SsdWidget widget, const char *new_value) {
    ssd_list_data_ptr data;
    int            relative_index;
@@ -447,6 +448,7 @@ static int delete_callback (SsdWidget widget, const char *new_value) {
 
    return (*data->del_callback) (list, text->value, data->data ? (void *)data->data[absolute_index ] : NULL);
 }
+#endif
 
 static BOOL move_focus( SsdWidget this, BOOL up /* or down */)
 {
@@ -516,6 +518,7 @@ static BOOL move_focus( SsdWidget this, BOOL up /* or down */)
    return TRUE;
 }
 
+#ifdef unused
 static BOOL ListItem_OnKeyPressed( SsdWidget this, const char* utf8char, uint32_t flags)
 {
    int               relative_index = 0;
@@ -577,6 +580,7 @@ static BOOL ListItem_OnKeyPressed( SsdWidget this, const char* utf8char, uint32_
 
    return FALSE;
 }
+#endif
 
 BOOL ssd_list_move_focus( SsdWidget list, BOOL up)
 {

@@ -101,7 +101,7 @@ static void roadmap_sprite_decode_plane
 {
 
    int   t;
-   char  pen[256];
+   char  pen[1000];
    char  color[256];
 
    if (length >= (int)sizeof(color)-1) {
@@ -130,7 +130,7 @@ static void roadmap_sprite_decode_plane
    t = ADJ_SCALE(t);
 #endif //IPHONE_NATIVE
 
-   sprintf (pen, "%s.%d.%s", sprite->name, t, color);
+   snprintf (pen, sizeof(pen), "%s.%d.%s", sprite->name, t, color);
    sprite->last->pen = roadmap_canvas_create_pen (pen);
 
    roadmap_canvas_set_foreground (color);

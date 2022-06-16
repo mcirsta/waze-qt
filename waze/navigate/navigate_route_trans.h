@@ -146,4 +146,6 @@ void navigate_route_cancel_request (void);
 
 void navigate_route_select (int alt_id);
 
+void navigate_route_on_response_error (void);
+
 #endif //__NAVIGATE_ROUTE_TRANS_H

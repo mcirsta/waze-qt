@@ -40,6 +40,7 @@
 #include "../roadmap_object.h"
 #include "../roadmap_math.h"
 #include "../roadmap_browser.h"
+#include "../roadmap_bar.h"
 #include "../roadmap_plugin.h"
 #include "../roadmap_trip.h"
 #include "../roadmap_navigate.h"
@@ -153,6 +154,7 @@ BOOL RealtimeExternalPoi_FeatureEnabled (void) {
    if (0 == strcmp (roadmap_config_get (&RoadMapConfigExternalPoisFeatureEnabled), "yes")){
       return TRUE;
    }
+   return FALSE;
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -706,7 +708,7 @@ void PoiNearByTimeout (void) {
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 void ShowPoiNearBy (RTExternalPoi *pEntity) {
-   RoadMapPosition      Point;
+   RoadMapGuiPoint      Point;
    RoadMapArea          ScreenArea;
    BOOL                 bAdded;
 
@@ -719,14 +721,14 @@ void ShowPoiNearBy (RTExternalPoi *pEntity) {
 
    roadmap_math_displayed_screen_edges(&ScreenArea);
 
-   Point.latitude = pEntity->iLatitude;
-   Point.longitude = pEntity->iLongitude;
+   Point.x = pEntity->iLatitude;
+   Point.y = pEntity->iLongitude;
    roadmap_math_rotate_coordinates(1, &Point);
-   if (Point.longitude < ScreenArea.west){
+   if (Point.y < ScreenArea.west){
       bAdded = AddPoiNearBy_Left(pEntity);
-   }else if (Point.longitude > ScreenArea.east){
+   }else if (Point.y > ScreenArea.east){
       bAdded = AddPoiNearBy_Right(pEntity);
-   }else if (Point.latitude < ScreenArea.south){
+   }else if (Point.x < ScreenArea.south){
          bAdded = AddPoiNearBy_Down(pEntity);
    }else{
          bAdded = AddPoiNearBy_Up(pEntity);

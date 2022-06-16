@@ -204,6 +204,7 @@ int roadmap_http_comp_read (RoadMapHttpCompCtx ctx, void *data, int size) {
          /* Ok, eat the header! */
          ctx->read_ptr += 10;
          ctx->state = STATE_COMPRESSION_FLOW;
+         [[fallthrough]];
 
          /* fall through to STATE_COMPRESSION_FLOW */
 

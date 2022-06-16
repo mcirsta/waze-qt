@@ -55,7 +55,7 @@ void roadmap_geo_config_il(RoadMapCallback callback);
 void roadmap_geo_config_usa(RoadMapCallback callback);
 void roadmap_geo_config_other(RoadMapCallback callback);
 void roadmap_geo_config_stg(RoadMapCallback callback);
-void roadmap_geo_config_generic(char * name);
+void roadmap_geo_config_generic(const char *name);
 const char *roadmap_geo_config_get_version(void);
 const char *roadmap_geo_config_get_server_id(void);
 #endif /* ROADMAP_GEO_CONFIG_H_ */

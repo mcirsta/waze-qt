@@ -84,7 +84,7 @@ struct _RTTrafficInfo
     int iType; 		//  Alert Type
     int iUserContribution;	// User contibution to creating this traffic alert
     char sStreet [RT_TRAFFIC_INFO_ADDRESS_MAXSIZE+1]; // The Street name
-    char sCity		[RT_TRAFFIC_INFO_ADDRESS_MAXSIZE+1]; // The City name
+    char sCity		[RT_TRAFFIC_INFO_ADDRESS_MAXSIZE+100]; // The City name
     char sStart	[RT_TRAFFIC_INFO_ADDRESS_MAXSIZE+1]; // The Start name
     char sEnd 	[RT_TRAFFIC_INFO_ADDRESS_MAXSIZE+1]; // The End name
 
@@ -92,7 +92,7 @@ struct _RTTrafficInfo
 	RoadMapPosition geometry[RT_TRAFFIC_INFO_MAX_GEOM];
 	RoadMapArea boundingBox;
 
-	char sDescription[RT_TRAFFIC_INFO_MAX_DESCRIPTION+1];
+    char sDescription[RT_TRAFFIC_INFO_MAX_DESCRIPTION+500];
 	BOOL bIsOnRoute;
 	BOOL bIsAlertable;
 	BOOL bUpdated;

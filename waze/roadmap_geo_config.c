@@ -87,7 +87,9 @@ static void lang_dlg(void);
 static void lang_loaded (void);
 static BOOL request_geo_config (void);
 static void run_completed_cb( void );
+#ifdef unused
 static void init_completed_cb( void );
+#endif
 
 void roadmap_geo_config_fixed_location(RoadMapPosition *gpsPosition, const char *name, RoadMapCallback callback);
 
@@ -1015,6 +1017,7 @@ static void run_completed_cb( void )
 ////////////////////////////////////////////////////////////////////
 //
 ///////////////////////////////////////////////////////////////////
+#ifdef unused
 static void init_completed_cb( void )
 {
    int i;
@@ -1024,6 +1027,7 @@ static void init_completed_cb( void )
       GeoConfigContext.completed_cb_ctx[i] = NULL;
    }
 }
+#endif
 
 ////////////////////////////////////////////////////////////////////
 //
@@ -1086,7 +1090,7 @@ void roadmap_geo_config_stg(RoadMapCallback callback){
 ////////////////////////////////////////////////////////////////////
 //
 ///////////////////////////////////////////////////////////////////
-void roadmap_geo_config_generic(char * name){
+void roadmap_geo_config_generic(const char * name){
     RoadMapPosition gpsPosition;
     ssd_dialog_hide_all(dec_close);
     ssd_progress_msg_dialog_show("Initializing, please wait...");

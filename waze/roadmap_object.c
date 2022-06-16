@@ -135,12 +135,14 @@ static BOOL initialized = FALSE;
 static RoadMapObject *roadmap_object_by_pos (RoadMapGuiPoint *point, BOOL action_only, RoadMapObject *cursor);
 static RoadMapObject *roadmap_object_search (RoadMapDynamicString id);
 static void release_object (RoadMapObject *cursor);
+#ifdef unused
 static void roadmap_object_add_child (RoadMapDynamicString  parent_id,
                                       RoadMapDynamicString  id,
                                       RoadMapDynamicString  image,
                                       const RoadMapGuiPoint *offset,
                                       long                   animation,
                                       RoadMapDynamicString  text);
+#endif
 
 #ifdef OPENGL
 static void animation_set_callback (void *context);
@@ -594,6 +596,7 @@ static BOOL is_visible(RoadMapObject *cursor) {
    return visible;
 }
 
+#ifdef OPENGL
 static BOOL is_fully_visible(RoadMapObject *cursor) {
    RoadMapPosition position;
    BOOL visible;
@@ -618,6 +621,7 @@ static BOOL is_fully_visible(RoadMapObject *cursor) {
    
    return visible;
 }
+#endif
 
 static RoadMapObject *roadmap_object_search (RoadMapDynamicString id) {
 
@@ -1045,6 +1049,7 @@ void roadmap_object_add_with_priority (RoadMapDynamicString origin,
    }
 }
 
+#ifdef unused
 static void roadmap_object_add_child (RoadMapDynamicString  parent_id,
                                       RoadMapDynamicString  id,
                                       RoadMapDynamicString  image,
@@ -1108,7 +1113,7 @@ static void roadmap_object_add_child (RoadMapDynamicString  parent_id,
    }
    
 }
-
+#endif
 
 void roadmap_object_move (RoadMapDynamicString id,
                           const RoadMapGpsPosition *position) {

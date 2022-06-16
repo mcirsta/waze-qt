@@ -84,6 +84,9 @@ const char* VerifyStatus(  /* IN  */   const char*       pNext,
             (*rc) = err_parser_unexpected_data;
          roadmap_log( ROADMAP_ERROR, "VerifyStatus() - Failed to read server response (%s)", pNext);
          return NULL;
+      case trans_was_canceled:
+         roadmap_log( ROADMAP_ERROR, "Handle trans_was_canceled !!!", pNext);
+         return NULL;
 
       case trans_succeeded:
          break;   // Continue with flow...
@@ -164,6 +167,10 @@ const char* VerifyStatusAndTag(  /* IN  */   const char*       pNext,
          if( succeeded == (*rc))
             (*rc) = err_parser_unexpected_data;
          roadmap_log( ROADMAP_ERROR, "RTNet::VerifyStatusAndTag() - Failed to read server response (%s)", pNext);
+         return NULL;
+
+      case trans_was_canceled:
+         roadmap_log( ROADMAP_ERROR, "Handle trans_was_canceled!!!", pNext);
          return NULL;
 
       case trans_succeeded:

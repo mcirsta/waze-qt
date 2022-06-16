@@ -24,4 +24,9 @@
 void single_search_dlg_show( PFN_ON_DIALOG_CLOSED cbOnClosed, void*                context);
 
 BOOL single_search_auto_search( const char* address);
+
+void single_search_dlg_show_favorite( const char *favorite_name,
+                                      PFN_ON_DIALOG_CLOSED cbOnClosed,
+                                      void*                context);
+BOOL single_search_add_favorite( const char* address, const char *favorite_name);
 #endif /* SINGLE_SEARCH_DLG_H_ */

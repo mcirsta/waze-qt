@@ -561,7 +561,7 @@ void roadmap_alerter_audio(){
    }
 }
 
-
+#ifdef unsed
 static void delete_callback(int exit_code, void *context){
    BOOL success;
 
@@ -577,7 +577,7 @@ static void delete_callback(int exit_code, void *context){
 
 
 }
-
+#endif
 
 static int report_irrelevant(SsdWidget widget, const char *new_value, void *context){
    PluginLine line;

@@ -1561,6 +1561,7 @@ static void on_option_selected(  BOOL              made_selection,
 
       case rtl_cm_send_thumbs_up:
          on_option_thumbs_up();
+         break;
 
       case rtl_cm_cancel:
          g_context_menu_is_active = FALSE;

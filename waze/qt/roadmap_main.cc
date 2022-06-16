@@ -168,7 +168,7 @@ void roadmap_main_set_keyboard(struct RoadMapFactoryKeyMap *bindings, RoadMapKey
 }
 
 RoadMapMenu roadmap_main_new_menu () {
-
+    return NULL;
 }
 
 void roadmap_main_free_menu (RoadMapMenu menu) {
@@ -387,17 +387,6 @@ void roadmap_main_minimize (void) {
 }
 
 /*************************************************************************************************
- * void on_auto_hide_dialog_close( int exit_code, void* context )
- * Auto hide dialog on close callback
- *
- */
-static void on_auto_hide_dialog_close( int exit_code, void* context )
-{
-}
-/*************************************************************************************************/
-
-
-/*************************************************************************************************
  * void roadmap_start_event (int event)
  * Start event hanler
  *
@@ -434,10 +423,20 @@ double atof_locale_safe(const char *str) {
 
 }
 
-QDateTime roadmap_time_get_current()
+time_s roadmap_time_get_current()
 {
     QDateTime qTime = QDateTime::currentDateTime();
-    return qTime;
+    time_s current_time;
+
+    current_time.year = qTime.date().year();
+    current_time.month = qTime.date().month();
+    current_time.day = qTime.date().day();
+    current_time.hour = qTime.time().hour();
+    current_time.min = qTime.time().minute();
+    current_time.sec = qTime.time().second();
+    current_time.msec = qTime.time().msec();
+
+    return current_time;
 }
 
 time_t roadmap_time_translate(const char *hhmmss, const char *ddmmyy) {

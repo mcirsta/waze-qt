@@ -123,7 +123,7 @@ SelectedLine SelectedLines[MAX_LINE_SELECTIONS];
 static int select_count;
 
 #ifdef SSD
-static char *PopupMenuItems[] = {
+static const char *PopupMenuItems[] = {
 
 #if EDITOR_ALLOW_LINE_DELETION
    "deleteroads",
@@ -840,11 +840,6 @@ static int editor_screen_draw_lines
    int drawn = 0;
 
    roadmap_log_push ("editor_screen_draw_lines");
-
-   if (! (-1 << min_cfcc)) {
-      roadmap_log_pop ();
-      return 0;
-   }
 
    count = editor_line_get_count ();
 

@@ -609,6 +609,7 @@ static int reminder_add_dlg_buttons_callback (SsdWidget widget, const char *new_
    return 1;
 }
 
+#ifndef TOUCH_SCREEN
 static int Save_sk_cb(SsdWidget widget, const char *new_value, void *context){
    SsdWidget container = widget;
    const char *argv[reminder_hi__count];
@@ -655,7 +656,7 @@ static int Save_sk_cb(SsdWidget widget, const char *new_value, void *context){
 
    return 1;
 }
-
+#endif
 
 int on_checkbox_selected (SsdWidget widget, const char *new_value){
    SsdWidget container = widget->parent->parent;

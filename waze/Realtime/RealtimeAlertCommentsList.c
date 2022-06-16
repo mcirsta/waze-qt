@@ -412,8 +412,8 @@ int RealtimeAlertCommentsList(int iAlertId)
    RTAlert *alert;
    char AlertStr[300];
    char CommentStr[300];
-   char ReportedByStr[100];
-   char DescriptionStr[300];
+   char ReportedByStr[150];
+   char DescriptionStr[500];
    char str[100];
    int distance;
    RoadMapGpsPosition CurrentPosition;

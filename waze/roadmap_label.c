@@ -69,6 +69,7 @@
 #include "roadmap_square.h"
 #include "roadmap_tile.h"
 #include "roadmap_res.h"
+#include "roadmap_time.h"
 
 #define CHECK_DIAGONAL_INTERSECTION 1
 #define POLY_OUTLINE 0
@@ -1186,7 +1187,7 @@ int roadmap_label_draw_cache (int angles, int full) {
          //font_type = (cPtr->line.cfcc <= ROADMAP_ROAD_EXIT || cPtr->line.cfcc == ROADMAP_AREA_CITY);
          font_type = FONT_TYPE_BOLD | FONT_TYPE_OUTLINE;
 
-         if ( (draw || !draw && cPtr->opacity)  && 
+         if ( (draw || (!draw && cPtr->opacity))  &&
              (!(cPtr->flags & LABEL_FLAG_PLACE) ||
                (place_label_count++ < MaxPlaceLabel))) {
 #if POLY_OUTLINE

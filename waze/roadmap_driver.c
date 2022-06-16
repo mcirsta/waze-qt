@@ -197,7 +197,7 @@ static void roadmap_driver_publish_satellites
 
       if (satellites[i].status == 'A') {
 
-         char id[4];
+         char id[6];
 
          snprintf (id, sizeof(id), ",%02d", satellites[i].id);
          strcat (buffer, id);

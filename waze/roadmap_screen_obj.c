@@ -80,7 +80,7 @@ struct RoadMapScreenObjDescriptor {
    char                *name; /* Unique name of the object. */
 
    char                *sprites[MAX_STATES]; /* Icons for each state. */
-   const char          *images[MAX_STATES]; /* Icons for each state. */
+   char                *images[MAX_STATES]; /* Icons for each state. */
 
    int                  states_count;
 
@@ -547,12 +547,15 @@ static RoadMapScreenObj roadmap_screen_obj_search (const char *name) {
 }
 
 static void road_screen_objects_delete(){
-   RoadMapScreenObj cursor;
-   for (cursor = RoadMapObjectList; cursor != NULL; cursor = cursor->next) {
-      free(cursor);
+    RoadMapScreenObj cursor;
+    for (cursor = RoadMapObjectList; cursor != NULL;) {
+        RoadMapScreenObj prev_cursor;
+        prev_cursor = cursor;
+        cursor = cursor->next;
+        free(prev_cursor);
 
-      RoadMapObjectList=NULL;
-   }
+        RoadMapObjectList=NULL;
+    }
 }
 
 static void roadmap_screen_obj_pos (RoadMapScreenObj object,

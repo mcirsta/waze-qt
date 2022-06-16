@@ -122,7 +122,7 @@ static void on_address_resolved( void*                context,
    SsdWidget list_cont = (SsdWidget)context;
    SsdWidget list;
    SsdWidget bmp_logo = NULL;
-   int       i;
+   intptr_t       i;
 
    s_searching = FALSE;
 
@@ -261,7 +261,7 @@ static int get_selected_list_item()
    list = ssd_widget_get( dlg, LSD_RC_LIST_NAME);
   waze_assert(list);
 
-   return (int)ssd_list_selected_value( list);
+   return (intptr_t)ssd_list_selected_value( list);
 }
 
 
@@ -289,7 +289,7 @@ static void on_option_selected(  BOOL              made_selection,
    {
       case cm_navigate:
          do_nav = TRUE;
-         // Roll down...
+         /* fall through */
       case cm_show:
          close = navigate( do_nav);
          break;

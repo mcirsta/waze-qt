@@ -32,6 +32,7 @@
 #include "roadmap_messagebox.h"
 #include "roadmap_trip.h"
 #include "roadmap_screen.h"
+#include "roadmap_social.h"
 #include "ssd/ssd_dialog.h"
 #include "ssd/ssd_container.h"
 #include "ssd/ssd_text.h"
@@ -614,28 +615,31 @@ static void create_address (FoursquareVenue*   venue, FoursquareCheckin* checkin
 
 static int on_venue_item_selected(SsdWidget widget, const char* selection,const void *value, void* context)
 {
-   int index = (int)value;
+    (void)widget;
+    (void)selection;
+    (void)context;
+    intptr_t index = (intptr_t)value;
 #ifdef IPHONE_NATIVE
-   index -= 10;
+    index -= 10;
 #endif //IPHONE_NATIVE
 
-   gsRequestType = ROADMAP_FOURSQUARE_CHECKIN;
+    gsRequestType = ROADMAP_FOURSQUARE_CHECKIN;
 
-   roadmap_main_set_periodic(FOURSQUARE_REQUEST_TIMEOUT, request_time_out);
+    roadmap_main_set_periodic(FOURSQUARE_REQUEST_TIMEOUT, request_time_out);
 #ifdef IPHONE
-   delayed_show_progress();
+    delayed_show_progress();
 #else
-   roadmap_main_set_periodic(100, delayed_show_progress);
+    roadmap_main_set_periodic(100, delayed_show_progress);
 #endif //IPHONE
 
-   create_address (&gsVenuesList[index], &gsCheckInInfo);
+    create_address (&gsVenuesList[index], &gsCheckInInfo);
 
-   ssd_dialog_hide_all(dec_close);
+    ssd_dialog_hide_all(dec_close);
 
-   Realtime_FoursquareCheckin(gsVenuesList[index].sId,
-         roadmap_foursquare_is_tweet_badge_enabled() && roadmap_twitter_logged_in());
+    Realtime_FoursquareCheckin(gsVenuesList[index].sId,
+                               roadmap_foursquare_is_tweet_badge_enabled() && roadmap_twitter_logged_in());
 
-   return 1;
+    return 1;
 }
 
 /////////////////////////////////////////////////////////////////////////////////////
@@ -643,7 +647,7 @@ void roadmap_foursquare_venues_list (void) {
    static   const char* results[ROADMAP_FOURSQUARE_MAX_VENUE_COUNT];
    static   void*       indexes[ROADMAP_FOURSQUARE_MAX_VENUE_COUNT];
    static   const char* icons[ROADMAP_FOURSQUARE_MAX_VENUE_COUNT];
-   int i;
+   intptr_t i;
 
    roadmap_main_remove_periodic(roadmap_foursquare_venues_list);
 

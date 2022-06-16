@@ -51,6 +51,7 @@
 #include "animation/roadmap_animation.h"
 #include "roadmap_time.h"
 #include "roadmap_tile_manager.h"
+#include "editor/track/editor_track_main.h"
 
 //FIXME remove when navigation will support plugin lines
 #include "editor/editor_plugin.h"
@@ -120,8 +121,8 @@ static RoadMapNavigateRoute RoadMapRouteInfo;
 static int RoadMapNavigateEnabled = 0;
 
 /* Avoid doing navigation work when the position has not changed. */
-static RoadMapGpsPosition RoadMapLatestGpsPosition = {0, 0, 0, -1, INVALID_STEERING};
-static RoadMapGpsPosition RoadMapLatestValidPosition = {0, 0, 0, -1, INVALID_STEERING};
+static RoadMapGpsPosition RoadMapLatestGpsPosition = {0, 0, 0, -1, INVALID_STEERING, -1};
+static RoadMapGpsPosition RoadMapLatestValidPosition = {0, 0, 0, -1, INVALID_STEERING, -1};
 static RoadMapPosition    RoadMapLatestPosition;
 static time_t             RoadMapLatestUpdate;
 static time_t				  RoadMapLatestGpsTime = 0;
@@ -529,7 +530,8 @@ int roadmap_navigate_fuzzify_internal (RoadMapTracking *tracked,
                                        int confidence,
                                        int speed,
                                        int accuracy) {
-
+   (void)confidence;
+   (void)speed;
    RoadMapFuzzy fuzzyfied_distance;
    RoadMapFuzzy fuzzyfied_direction;
    RoadMapFuzzy fuzzyfied_direction_with_line = 0;
@@ -1035,9 +1037,9 @@ void roadmap_navigate_locate (const RoadMapGpsPosition *gps_position, time_t gps
 		RoadMapLatestGpsPosition.steering = gps_position->steering;
 	} else if (gps_position->speed == 0 && first_speed_time > 0) {
       last_azymuth_point = *(RoadMapPosition*)gps_position;
-   } else if (gps_position->accuracy <= 0 &&
+   } else if ((gps_position->accuracy <= 0 &&
               roadmap_math_distance((RoadMapPosition *) &last_azymuth_point,
-			   		(RoadMapPosition *) gps_position) > 20 ||
+                    (RoadMapPosition *) gps_position) > 20) ||
               roadmap_math_distance((RoadMapPosition *) &last_azymuth_point,
                                     (RoadMapPosition *) gps_position) > gps_position->accuracy) {
 		RoadMapLatestGpsPosition.steering = roadmap_math_azymuth
@@ -1206,10 +1208,10 @@ void roadmap_navigate_locate (const RoadMapGpsPosition *gps_position, time_t gps
       if (!candidates[0].found ||
           (result > candidates[0].result && (candidate_in_route == candidates[0].in_route ||
                                              candidate_in_route ||
-                                             !roadmap_fuzzy_is_acceptable(confidence) && !roadmap_fuzzy_is_good(candidates[0].result))) ||
+                                             (!roadmap_fuzzy_is_acceptable(confidence) && !roadmap_fuzzy_is_good(candidates[0].result)))) ||
           (!candidates[0].in_route && candidate_in_route &&
            RoadMapNeighbourhood[i].distance < distance_threashold*2 &&
-           (roadmap_fuzzy_is_acceptable (result) && roadmap_fuzzy_is_acceptable(confidence) || roadmap_fuzzy_is_good(result)))) {
+           ((roadmap_fuzzy_is_acceptable (result) && roadmap_fuzzy_is_acceptable(confidence)) || roadmap_fuzzy_is_good(result)))) {
              
          if (!candidates[2].found ||
              candidates[1].result >= candidates[2].result)
@@ -1293,8 +1295,8 @@ void roadmap_navigate_locate (const RoadMapGpsPosition *gps_position, time_t gps
 #endif
    
    if (RoadMapConfirmedStreet.valid && editor_ignore_new_roads()) {
-      if ((!candidates[0].found || !roadmap_fuzzy_is_acceptable(candidates[0].result)  &&
-           (roadmap_fuzzy_false() != roadmap_fuzzy_or(RoadMapConfirmedStreet.cur_fuzzyfied, confidence)))/* ||
+      if ((!candidates[0].found || (!roadmap_fuzzy_is_acceptable(candidates[0].result)  &&
+           (roadmap_fuzzy_false() != roadmap_fuzzy_or(RoadMapConfirmedStreet.cur_fuzzyfied, confidence))))/* ||
           ((!candidates[0].in_route && current_in_route) &&
            (roadmap_fuzzy_is_good(roadmap_fuzzy_and(RoadMapConfirmedStreet.cur_fuzzyfied, confidence)) ||
             (roadmap_fuzzy_is_acceptable(confidence) && !roadmap_fuzzy_is_good(candidates[0].tracking.debug.connected)) ||
@@ -1358,8 +1360,8 @@ void roadmap_navigate_locate (const RoadMapGpsPosition *gps_position, time_t gps
          printf("confidence reset\n");
 #endif
       } else if (//!roadmap_fuzzy_is_certain(candidates[0].result) &&
-                 candidates[1].found && roadmap_fuzzy_is_good(candidates[1].result) ||
-                 candidates[1].found && candidates[1].result - candidates[0].result > roadmap_fuzzy_true()/10) {
+                 (candidates[1].found && roadmap_fuzzy_is_good(candidates[1].result)) ||
+                 (candidates[1].found && candidates[1].result - candidates[0].result > roadmap_fuzzy_true()/10)) {
          RoadMapStreetProperties properties0, properties1;
          char *street_name0, *street_name1;
          roadmap_square_set_current(RoadMapNeighbourhood[candidates[0].index].line.square);

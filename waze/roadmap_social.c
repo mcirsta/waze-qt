@@ -850,7 +850,7 @@ static int on_ok(void *context) {
    BOOL logged_in;
    const char *user_name;
    const char *password;
-   int dlg_type = (int)context;
+   int dlg_type = (intptr_t)context;
    int show_name;
    int show_pic;
    const char* val;

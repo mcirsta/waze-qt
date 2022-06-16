@@ -53,7 +53,8 @@ typedef enum tag_transaction_result
 {
    trans_succeeded,
    trans_failed,
-   trans_in_progress
+   trans_in_progress,
+   trans_was_canceled
 
 }  transaction_result;
 

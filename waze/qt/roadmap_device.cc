@@ -119,9 +119,15 @@ BOOL roadmap_horizontal_screen_orientation() {
 
 BOOL roadmap_camera_take_picture( CameraImageFile* image_file, CameraImageBuf* image_thumbnail ) {
     /* TODO */
+    (void)image_file;
+    (void)image_thumbnail;
+    return FALSE;
 }
 
 BOOL roadmap_camera_take_picture_async( CameraImageCaptureCallback callback, CameraImageCaptureContext* context ) {
     /* TODO */
+    (void)callback;
+    (void)context;
+    return FALSE;
 }
 #endif

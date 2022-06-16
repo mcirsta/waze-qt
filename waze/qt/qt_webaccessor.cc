@@ -83,7 +83,7 @@ QString WazeWebAccessor::buildHeader(RequestType type, QUrl url, QString additio
             .arg(additional);
 }
 
-HttpAsyncContext* WazeWebAccessor::postRequestParser(int flags,
+void WazeWebAccessor::postRequestParser(int flags,
                                         const char* action,
                                         wst_parser parsers[],
                                         int parser_count,
@@ -91,7 +91,7 @@ HttpAsyncContext* WazeWebAccessor::postRequestParser(int flags,
                                         LPRTConnectionInfo pci,
                                         const QString &data)
 {
-    return postRequestParser(
+    postRequestParser(
                 QString(),
                 flags,
                 action,
@@ -104,7 +104,7 @@ HttpAsyncContext* WazeWebAccessor::postRequestParser(int flags,
                 );
 }
 
-HttpAsyncContext* WazeWebAccessor::postRequestParser(
+void WazeWebAccessor::postRequestParser(
                                   QString address,
                                   int flags,
                                   const char* action,
@@ -175,8 +175,6 @@ HttpAsyncContext* WazeWebAccessor::postRequestParser(
     {
         emit requestDone();
     }
-
-    return &cd;
 }
 
 void WazeWebAccessor::setV2Suffix(QString suffix)
@@ -235,7 +233,7 @@ void WazeWebAccessor::runParsersAndCallback(HttpAsyncContext& cd, QByteArray& re
     roadmap_log(ROADMAP_INFO, "Response:\n%s\n", qPrintable(data));
     while(next != NULL && next[0] != '\0')
     {
-        int tagEndIndex = 0;
+        uint tagEndIndex = 0;
 
        if( have_tags)
        {
@@ -309,26 +307,26 @@ HttpAsyncContext* WazeWebAccessor::getRequest(QString url, int flags, RoadMapHtt
         free(timeStr);
     }
 
-    HttpAsyncContext cd;
-    cd.type = ProgressBased;
-    cd.isSecured = false;
-    cd.isPost = false;
-    cd.callback.callbacks = callbacks;
-    cd.context = context;
-    cd.receivedBytes = 0;
-    cd.sentBytes = 0;
-    cd.ignoreContentLength = flags & HTTPCOPY_FLAG_IGNORE_CONTENT_LEN;
-    cd.statusCode = 0;
-    cd.bytes = new QByteArray();
-    cd.buffer = new QBuffer(cd.bytes);
-    cd.buffer->open(QIODevice::WriteOnly);
-    cd.url = encodedUrl;
-    cd.decompress = false;
-    cd.requestHeader = header;
-    cd.responseHeader = NULL;
-    cd.requestData = new QByteArray();
+    HttpAsyncContext *cd = new HttpAsyncContext();
+    cd->type = ProgressBased;
+    cd->isSecured = false;
+    cd->isPost = false;
+    cd->callback.callbacks = callbacks;
+    cd->context = context;
+    cd->receivedBytes = 0;
+    cd->sentBytes = 0;
+    cd->ignoreContentLength = flags & HTTPCOPY_FLAG_IGNORE_CONTENT_LEN;
+    cd->statusCode = 0;
+    cd->bytes = new QByteArray();
+    cd->buffer = new QBuffer(cd->bytes);
+    cd->buffer->open(QIODevice::WriteOnly);
+    cd->url = encodedUrl;
+    cd->decompress = false;
+    cd->requestHeader = header;
+    cd->responseHeader = NULL;
+    cd->requestData = new QByteArray();
 
-    _requestQueue.push_back(cd);
+    _requestQueue.push_back(*cd);
 
     int requestNum = _requestQueue.length();
     if (0 < requestNum && requestNum <= MAX_CONNECTIONS)
@@ -336,11 +334,11 @@ HttpAsyncContext* WazeWebAccessor::getRequest(QString url, int flags, RoadMapHtt
         emit requestDone();
     }
 
-    return &cd;
+    return cd;
 }
 
 
-HttpAsyncContext* WazeWebAccessor::postRequestProgress(QString url, int flags, RoadMapHttpAsyncCallbacks *callbacks, void *context, const char* req_header, const void* data, int data_length)
+bool WazeWebAccessor::postRequestProgress(QString url, int flags, RoadMapHttpAsyncCallbacks *callbacks, void *context, const char* req_header, const void* data, int data_length)
 {
     QUrl encodedUrl = QUrl::fromEncoded(url.toAscii());
     bool isSecured = flags & WEBSVC_FLAG_SECURED;
@@ -395,9 +393,10 @@ HttpAsyncContext* WazeWebAccessor::postRequestProgress(QString url, int flags, R
     if (0 < requestNum && requestNum <= MAX_CONNECTIONS)
     {
         emit requestDone();
+        return true;
     }
 
-    return &cd;
+    return false;
 }
 
 void WazeWebAccessor::oldStyleFinished(bool isError)

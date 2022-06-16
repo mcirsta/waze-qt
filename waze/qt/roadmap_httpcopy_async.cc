@@ -43,7 +43,7 @@ extern "C" {
 
 #define ROADMAP_HTTP_MP_BOUNDARY   "---------------------------10424402741337131014341297293"
 
-HttpAsyncContext * roadmap_http_async_post_file( RoadMapHttpAsyncCallbacks *callbacks, void *context,
+bool roadmap_http_async_post_file( RoadMapHttpAsyncCallbacks *callbacks, void *context,
                                            const char *source, const char* header, const char *full_name, int size )
 {
     QFile file(QString::fromAscii(full_name));
@@ -111,10 +111,10 @@ const char* roadmap_http_async_get_upload_header( const char* content_type, cons
    return s_header;
 }
 
-HttpAsyncContext * roadmap_http_async_post( RoadMapHttpAsyncCallbacks *callbacks, void *context,
+void roadmap_http_async_post( RoadMapHttpAsyncCallbacks *callbacks, void *context,
                                             const char *source, const char* header, const void* data, int data_length, int flags )
 {
-    return WazeWebAccessor::getInstance().postRequestProgress(QString::fromAscii(source), flags, callbacks, context, header, data, data_length);
+    WazeWebAccessor::getInstance().postRequestProgress(QString::fromAscii(source), flags, callbacks, context, header, data, data_length);
 }
 
 const char* roadmap_http_async_get_simple_header( const char* content_type, int content_len )

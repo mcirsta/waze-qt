@@ -247,6 +247,7 @@ static int get_alert_subtype(int traffic_type){
       case STAND_STILL_TRAFFIC:
          return JAM_TYPE_STAND_STILL_TRAFFIC;
    }
+   return JAM_TYPE_MODERATE_TRAFFIC;
 }
 
 /**
@@ -549,7 +550,8 @@ BOOL RTTrafficInfo_Add(RTTrafficInfo *pTrafficInfo)
 
 
     if ((gTrafficInfoTable.pTrafficInfo[gTrafficInfoTable.iCount]->sStreet[0] != 0) & (gTrafficInfoTable.pTrafficInfo[gTrafficInfoTable.iCount]->sCity[0] != 0) ){
-    		sprintf(gTrafficInfoTable.pTrafficInfo[gTrafficInfoTable.iCount]->sDescription,"%s, %s", gTrafficInfoTable.pTrafficInfo[gTrafficInfoTable.iCount]->sStreet, gTrafficInfoTable.pTrafficInfo[gTrafficInfoTable.iCount]->sCity );
+            sprintf(gTrafficInfoTable.pTrafficInfo[gTrafficInfoTable.iCount]->sDescription,"%s, %s",
+                    gTrafficInfoTable.pTrafficInfo[gTrafficInfoTable.iCount]->sStreet, gTrafficInfoTable.pTrafficInfo[gTrafficInfoTable.iCount]->sCity );
     }
     else if ((gTrafficInfoTable.pTrafficInfo[gTrafficInfoTable.iCount]->sStreet[0] != 0) & (gTrafficInfoTable.pTrafficInfo[gTrafficInfoTable.iCount]->sStart[0] != 0)  & (gTrafficInfoTable.pTrafficInfo[gTrafficInfoTable.iCount]->sEnd[0] != 0) ){
     	if (!strcmp(gTrafficInfoTable.pTrafficInfo[gTrafficInfoTable.iCount]->sStart, gTrafficInfoTable.pTrafficInfo[gTrafficInfoTable.iCount]->sEnd))

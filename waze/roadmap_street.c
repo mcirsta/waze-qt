@@ -1606,14 +1606,14 @@ static const char *parse_extended_data(const RoadMapStreetProperties *properties
    text[0] = '\0';
    
    for (i = 0; i <= type && data && data[0] >= '0' && data[0] <= '9'; i++) {
-      int count = 0;
+      uint count = 0;
       
       // read char count of row
       while (data && data[0] >= '0' && data[0] <= '9') {
          count = count * 10 + (data[0] - '0');
          data++;
       }
-      if (!data || !data[0] == ',')
+      if (!data || !(data[0] == ','))
          return "";
       
       data++;

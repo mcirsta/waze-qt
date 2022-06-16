@@ -37,6 +37,7 @@
 #include "ssd_text.h"
 #include "ssd_popup.h"
 #include "ssd_bitmap.h"
+#include "ssd_popup.h"
 
 #define TITLE_TEXT_SIZE 16
 #define POPUP_TEXT_SIZE 14

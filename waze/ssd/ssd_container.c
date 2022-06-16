@@ -548,8 +548,9 @@ static void draw (SsdWidget widget, RoadMapGuiRect *rect, int flags) {
 				background = "#b0d504";
          	else if ((widget->flags & SSD_POINTER_COMMENT) | (widget->flags & SSD_POINTER_MENU) |  (widget->flags & SSD_POINTER_NONE))
          		background = "#e4f1f9";
-         	else
+            else {
          		background = "#f3f3f5";
+            }
 
 		 	background = "#d2dfef";
 	 	   header_type = HEADER_NONE;

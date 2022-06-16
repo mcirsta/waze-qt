@@ -59,7 +59,7 @@
 #define GET_2_DIGIT_STRING( num_in, str_out ) \
 { \
 str_out[0] = '0'; \
-sprintf( &str_out[(num_in < 10)], "%d", num_in ); \
+sprintf( str_out, "%1d", (uint8_t)(num_in%100)); \
 }
 
 static RoadMapConfigDescriptor RMCfgDebugInfoServer =
@@ -77,7 +77,7 @@ typedef struct tag_upload_context{
 }upload_context;
 
 static int upload_file_size_callback( void *context, size_t aSize );
-static void upload_progress_callback(void *context, char *data, size_t size);
+static void upload_progress_callback(void *context, const char *data, size_t size);
 static void upload_error_callback( void *context, int connection_failure, const char *format, ...);
 static void upload_done( void *context, char *last_modified, const char *format, ... );
 
@@ -110,16 +110,22 @@ BOOL debug_info_warning_fn ( char* dest_string ) {
 
 ///////////////////////////////////////////////////////
 static int upload_file_size_callback( void *context, size_t aSize ) {
+    (void)context;
+    (void)aSize;
 	return 1;
 }
 
 ///////////////////////////////////////////////////////
-static void upload_progress_callback(void *context, char *data, size_t size) {
+static void upload_progress_callback(void *context,const char *data, size_t size) {
+    (void)context;
+    (void)size;
+    (void)data;
 }
 
 ///////////////////////////////////////////////////////
 static void upload_error_callback( void *context, int connection_failure, const char *format, ...) {
-	va_list ap;
+    (void)connection_failure;
+    va_list ap;
    char err_string[1024];
    upload_context *  uContext = (upload_context *)context;
 

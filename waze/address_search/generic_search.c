@@ -364,8 +364,7 @@ BOOL navigate_with_coordinates( BOOL take_me_there, search_types type, int   sel
    ai.street   = selection->street;
    ai.house    = get_house_number__str( selection->house);
 
-   if (selection->name)
-      name = selection->name;
+   name = selection->name;
    generic_search_add_address_to_history( ADDRESS_HISTORY_CATEGORY,
                                           selection->city,
                                           selection->street,

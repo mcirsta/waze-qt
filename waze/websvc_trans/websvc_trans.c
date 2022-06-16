@@ -833,22 +833,24 @@ transaction_result on_socket_connected_(  RoadMapSocket     Socket,
 
 void on_socket_connected( RoadMapSocket Socket, void* context, roadmap_result res)
 {
-   wst_context_ptr session = (wst_context_ptr)context;
+    wst_context_ptr session = (wst_context_ptr)context;
 
-   session->result = on_socket_connected_( Socket, context, res);
-   switch( session->result)
-   {
-      case trans_succeeded:
-         wst_transaction_completed( session, succeeded);
-         break;
+    session->result = on_socket_connected_( Socket, context, res);
+    switch( session->result)
+    {
+    case trans_succeeded:
+        wst_transaction_completed( session, succeeded);
+        break;
 
-      case trans_failed:
-         wst_transaction_completed( session, session->rc);
-         break;
-
-      case trans_in_progress:
-         break;
-   }
+    case trans_failed:
+        wst_transaction_completed( session, session->rc);
+        break;
+//TODO check if correct handling
+    case trans_was_canceled:
+        break;
+    case trans_in_progress:
+        break;
+    }
 }
 
 transaction_result on_data_received_( void* data, int size, wst_context_ptr session)
@@ -928,7 +930,7 @@ transaction_result on_data_received_( void* data, int size, wst_context_ptr sess
    if( http_parse_completed == http_parser_state)
       res = OnCustomResponse( session);
    
-   if (res == trans_canceled)
+   if (res == trans_was_canceled)
       return res;
 
    if( res == trans_failed ) {
@@ -1275,7 +1277,7 @@ static transaction_result OnCustomResponse( wst_context_ptr session)
       
       if (session->http_parser_state != http_parse_completed) {
          //current request was removed from queue and replaced by a new request
-         return trans_canceled;
+         return trans_was_canceled;
       }
       
       if( !next)

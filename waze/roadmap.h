@@ -86,11 +86,7 @@ typedef int BOOL;
 
 #define OBJ2STR_SCAN( val ) ( #val )
 #define OBJ2STR( val ) ( OBJ2STR_SCAN( val ) )
-#define GET_2_DIGIT_STRING( num_in, str_out ) \
-{ \
-str_out[0] = '0'; \
-sprintf( &str_out[(num_in < 10)], "%d", num_in ); \
-}
+
 #define SAFE_STR( str ) ( ( str ) ? ( str ) : "NULL" )
 
 
@@ -176,7 +172,6 @@ static inline void do_assert(char *text) {
 
 typedef void (*roadmap_log_msgbox_handler) (const char *title, const char *msg);
 
-#ifdef QTMOBILITY
 #include <time.h>
 
 typedef struct {
@@ -187,8 +182,6 @@ time_s roadmap_time_get_current();
 
 time_t roadmap_time_translate(const char *hhmmss,
                               const char *ddmmyy);
-
-#endif
 
 #ifndef J2ME
 void roadmap_log_push        (const char *description);

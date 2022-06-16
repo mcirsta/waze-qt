@@ -102,7 +102,7 @@
 #define RT_ALERT_GROUP_ICON_MAXSIZE       100
 
 #define RT_ALERTS_MAX_ALERT_TYPE           64
-#define RT_ALERTS_MAX_ADD_ON_NAME         128
+#define RT_ALERTS_MAX_ADD_ON_NAME         200
 #define RT_ALERTS_MAX_ICON_NAME           128
 #define RT_ALERTS_MAX_TITLE_NAME          128
 
@@ -230,7 +230,7 @@ typedef struct
     int iNode1; // Alert's segment
     int iNode2; // Alert's segment
     char sDescription [RT_ALERT_DESCRIPTION_MAXSIZE+1]; // Alert's description
-    char sLocationStr[RT_ALERT_LOCATION_MAX_SIZE+1]; //alert location
+    char sLocationStr[RT_ALERT_LOCATION_MAX_SIZE+100]; //alert location
     char sImageIdStr[RT_ALERT_IMAGEID_MAXSIZE+1];
     char sVoiceIdStr[RT_ALERT_VOICEID_MAXSIZE+1];
     char sNearStr[RT_ALERT_LOCATION_MAX_SIZE+1];

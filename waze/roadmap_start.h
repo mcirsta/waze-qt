@@ -102,5 +102,6 @@ void start_mywaze_menu(void);
 const char * roadmap_start_get_map_credit(void);
 RoadMapAction *roadmap_start_find_action_un_const (const char *name) ;
 BOOL roadmap_start_is_first_use(void);
+void save_destination_to_history();
 #endif /* INCLUDE__ROADMAP_START__H */
 

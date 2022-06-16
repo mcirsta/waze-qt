@@ -38,6 +38,7 @@
 #include "roadmap_plugin.h"
 #include "roadmap_line_route.h"
 #include "roadmap_street.h"
+#include "roadmap_turns.h"
 
 #include "roadmap_fuzzy.h"
 

@@ -59,6 +59,12 @@ static FILE *sgLogFile = NULL;
 #define MAX_SIZE_LOG_FILE 10000 // 10 megabytes for now
 #define TO_KEEP_LOG_SIZE 1000 // keep the last megabyte
 
+#define GET_2_DIGIT_STRING( num_in, str_out ) \
+{ \
+str_out[0] = '0'; \
+sprintf( str_out, "%1d", (uint8_t)(num_in%100)); \
+}
+
 static const char *RoadMapLogStack[ROADMAP_LOG_STACK_SIZE];
 static int         RoadMapLogStackCursor = 0;
 
@@ -207,7 +213,7 @@ static void roadmap_log_one (struct roadmap_message_descriptor *category,
 SYSTEMTIME st;
 #endif
 
-#ifndef QTMOBILITY
+#ifndef USE_QT
 int i;
 struct tm *tms;
 time_t now;
@@ -222,7 +228,7 @@ GET_2_DIGIT_STRING( tms->tm_year-100, year ); // Year from 1900
 #ifdef J2ME
    fprintf (file, "%d %c%s %s, line %d ",
          time(NULL), saved, category->prefix, source, line);
-#elif defined(QTMOBILITY)
+#elif defined(USE_QT)
     int i;
     time_s time = roadmap_time_get_current();
 
@@ -262,7 +268,7 @@ GET_2_DIGIT_STRING( tms->tm_year-100, year ); // Year from 1900
    //struct tm *tms;
    struct timeb tp;
 
-   ftime(&tp);
+   clock_gettime(CLOCK_REALTIME, &tp)
    tms = localtime (&tp.time);
 
    fprintf (file, "%02d:%02d:%02d.%03d %c%s %s, line %d ",
@@ -294,7 +300,7 @@ GET_2_DIGIT_STRING( tms->tm_year-100, year ); // Year from 1900
    }
 
    if (RoadmapLogMsgBox && category->do_exit) {
-      char str[256];
+      char str[500];
       char msg[256];
 #ifdef   FREEZE_ON_FATAL_ERROR
       const char* title = "Fatal Error - Process awaits debugger";

@@ -26,6 +26,7 @@
 #define INCLUDED__ROADMAP_HTTPCOPY__H
 
 #include <time.h>
+#include <stdbool.h>
 
 #define HTTPCOPY_FLAG_NONE                               0x00000000
 #define HTTPCOPY_FLAG_IGNORE_CONTENT_LEN                 0x00000001
@@ -53,12 +54,12 @@ HttpAsyncContext *roadmap_http_async_copy (RoadMapHttpAsyncCallbacks *callbacks,
 
 void	roadmap_http_async_copy_abort (HttpAsyncContext *context);
 
-HttpAsyncContext * roadmap_http_async_post( RoadMapHttpAsyncCallbacks *callbacks, void *context,
+void roadmap_http_async_post( RoadMapHttpAsyncCallbacks *callbacks, void *context,
                                                  const char *source, const char* header, const void* data, int data_length, int flags );
 
 const char* roadmap_http_async_get_simple_header( const char* content_type, int content_len );
 
-HttpAsyncContext * roadmap_http_async_post_file( RoadMapHttpAsyncCallbacks *callbacks, void *context,
+bool roadmap_http_async_post_file( RoadMapHttpAsyncCallbacks *callbacks, void *context,
                                                 const char *source, const char* header, const char *full_name, int size );
 const char* roadmap_http_async_get_upload_header( const char* content_type, const char *full_name, int size,
                                                  const char *user, const char *pw);

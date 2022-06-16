@@ -29,6 +29,7 @@
 #include "../ssd/ssd_bitmap.h"
 #include "../ssd/ssd_keyboard_dialog.h"
 #include "../ssd/ssd_progress_msg_dialog.h"
+#include "../editor/editor_screen.h"
 #include "../roadmap_input_type.h"
 #include "../roadmap.h"
 #include "../roadmap_lang.h"
@@ -48,6 +49,7 @@
 #include "../roadmap_reminder.h"
 #include "../roadmap_analytics.h"
 #include "../roadmap_gps.h"
+#include "../roadmap_search.h"
 #include "address_search.h"
 #include "local_search.h"
 #include "single_search.h"
@@ -131,9 +133,9 @@ static void update_list(SsdWidget list_cont){
     static   const char* icons_adr[ADSR_MAX_RESULTS+1];
     int      count_adr = 0;
     SsdWidget list_address;
-    int       i;
+    intptr_t       i;
     int size = generic_search_result_count();
-    address_candidate*   array = generic_search_result(0);
+    const address_candidate*   array = generic_search_result(0);
     /* Close the progress message */
     ssd_progress_msg_dialog_hide();
 
@@ -184,7 +186,7 @@ static int get_selected_list_item()
       list = ssd_widget_get( dlg, SSD_RC_LSLIST_NAME);
   waze_assert(list);
 
-   return (int)ssd_list_selected_value( list);
+   return (intptr_t)ssd_list_selected_value( list);
 }
 
 static int get_ls_first_index()
@@ -200,13 +202,13 @@ static int get_ls_first_index()
    if (!list)
       return 0;
 
-   return (int)ssd_list_row_value( list, 0);
+   return (intptr_t)ssd_list_row_value( list, 0);
 }
 
 
 static int on_addr_list_item_selected(SsdWidget widget, const char *new_value, const void *value)
 {
-   if (value == -1){
+   if ((intptr_t)value == -1){
       widget->in_focus = FALSE;
       widget->force_click = FALSE;
       update_list(widget);
@@ -296,7 +298,7 @@ static void on_address_resolved( void*                context,
    SsdWidget list_cont = (SsdWidget)context;
    SsdWidget list_address;
    SsdWidget list_ls;
-   int       i;
+   intptr_t       i;
    int       adr_index = 0 ;
    int       ls_index = 0;
 
@@ -518,7 +520,7 @@ static void on_search(void)
 #endif
 
    if (strstr(txt, "##@")){
-      char *name;
+      const char *name;
       name = txt+3;
       if (name && name[0] != 0){
          roadmap_geo_config_generic(name);
@@ -680,7 +682,7 @@ static void on_option_selected(  BOOL              made_selection,
    {
       case cm_navigate:
          do_nav = TRUE;
-         // Roll down...
+         // fall through
       case cm_show:
          close = navigate( do_nav);
          break;

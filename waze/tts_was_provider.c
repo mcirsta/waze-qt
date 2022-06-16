@@ -149,12 +149,12 @@ static WasRequestContext* _allocate_context( void );
 static void _synth_request( const void* context, TtsTextList text_list, const TtsSynthRequestParams* params, TtsSynthResponseCb response_cb );
 
 static int _request_size_cb( void *context_cb, size_t size );
-static void _request_progress_cb( void *context_cb, char *data, size_t size );
+static void _request_progress_cb(void *context_cb, const char *data, size_t size );
 static void _request_error_cb( void *context_cb, int connection_failure, const char *format, ... );
 static void _request_done_cb( void *context_cb, char *last_modified, const char *format, ...  );
 
 static int _voices_cfg_size_cb( void *context_cb, size_t size );
-static void _voices_cfg_progress_cb( void *context_cb, char *data, size_t size );
+static void _voices_cfg_progress_cb( void *context_cb,const char *data, size_t size );
 static void _voices_cfg_error_cb( void *context_cb, int connection_failure, const char *format, ... );
 static void _voices_cfg_done_cb( void *context_cb, char *last_modified, const char *format, ...  );
 static const char* _voices_cfg_url ( void );
@@ -276,7 +276,7 @@ static int _request_size_cb( void *context_cb, size_t size ) {
 /*
  ******************************************************************************
  */
-static void _request_progress_cb( void *context_cb, char *data, size_t size )
+static void _request_progress_cb( void *context_cb,const char *data, size_t size )
 {
    WasRequestContext* context = (WasRequestContext*) context_cb;
 
@@ -790,7 +790,7 @@ static int _voices_cfg_size_cb ( void *context_cb, size_t size )
 * Voices download http progress callback
 * Auxiliary
 */
-static void _voices_cfg_progress_cb ( void *context_cb, char *data, size_t size )
+static void _voices_cfg_progress_cb ( void *context_cb,const char *data, size_t size )
 {
    WasVoicesHttpCtx* context = (WasVoicesHttpCtx*) context_cb;
 

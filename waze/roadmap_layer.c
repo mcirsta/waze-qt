@@ -512,4 +512,112 @@ const char *roadmap_layer_cfcc2type(int cfcc) {
    return categories[cfcc - ROADMAP_ROAD_FIRST];
 }
 
+int roadmap_layer_is_visible (int layer, int area) {
 
+    struct roadmap_canvas_category *category = RoadMapCategory + layer;
+
+    if (! category->visible) {
+        return 0;
+    }
+
+    return roadmap_math_declutter (category->declutter, area);
+}
+
+int roadmap_layer_label_is_visible (int layer, int area) {
+
+    struct roadmap_canvas_category *category = RoadMapCategory + layer;
+
+    if (! category->label_visible) {
+        return 0;
+    }
+    return roadmap_math_declutter (category->label_declutter, area);
+}
+
+
+int roadmap_layer_max_pen(void) {
+
+   if (RoadMapMaxUsedPen > 2)
+    return 2;
+
+   return RoadMapMaxUsedPen;
+}
+
+
+RoadMapPen roadmap_layer_get_pen (int layer, int pen_type, int area) {
+
+    int proj = area;
+
+#ifdef VIEW_MODE_3D_OGL
+     /* rely on opengl to shrink the lines on the horizon */
+         if (proj < 4) proj = 0;
+#endif
+
+   if (!roadmap_layer_is_visible (layer, proj)) return NULL;
+
+#ifndef OGL_TILE
+   // Do not draw city polygons while in fast draw mode
+   if ((layer == ROADMAP_AREA_CITY) && roadmap_screen_fast_refresh()) return NULL;
+#endif
+
+   if (pen_type == -1) {
+
+      int i;
+      for (i=roadmap_layer_max_pen() - 1; i>=0; i--) {
+
+         if (RoadMapCategory[layer].in_use[proj][i])
+            return RoadMapCategory[layer].pen[proj][i];
+      }
+
+      return NULL;
+   }
+
+   if (!RoadMapCategory[layer].in_use[proj][pen_type]) return NULL;
+
+   if (proj && (pen_type == 0) && !RoadMapCategory[layer].in_use[proj][1] &&
+                   RoadMapCategory[layer].in_use[0][1])
+      return RoadMapCategory[layer].pen[0][1];
+
+   return RoadMapCategory[layer].pen[0][pen_type];
+}
+
+RoadMapPen roadmap_layer_get_label_pen (int layer) {
+   return RoadMapCategory[layer].label_pen;
+}
+
+int roadmap_layer_get_declutter(int layer) {
+   struct roadmap_canvas_category *category = RoadMapCategory + layer;
+
+   return category->declutter;
+}
+
+
+int roadmap_layer_visible_lines (int *layers, int size, int pen_type) {
+
+    int i;
+    int j;
+    int count = -1;
+
+    --size; /* To match our boundary check. */
+
+    for (i = 0; RoadMapLineClass[i].name != NULL; ++i) {
+
+        RoadMapClass *this_class = RoadMapLineClass + i;
+
+        for (j = 0; j<this_class->count; ++j) {
+
+            int category = this_class->category[j];
+
+            if (pen_type >= RoadMapCategory[category].pen_count) continue;
+//TODO check if new line is correct, old is (            if (! RoadMapCategory[category].in_use[pen_type]) continue;)
+            if (! RoadMapCategory[category].in_use[0][pen_type]) continue;
+
+            if (roadmap_layer_is_visible (category, 0)) {
+                if (count >= size) goto done;
+                layers[++count] = category;
+            }
+        }
+    }
+
+done:
+    return count + 1;
+}

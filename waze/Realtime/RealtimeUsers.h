@@ -31,8 +31,8 @@
 #define  RT_USERTTL_MAXSIZE            (63)
 #define  RL_MAXIMUM_USERS_COUNT        (50)
 #define  RT_USERFACEBOOK_MAXSIZE       (100)
-#define  RT_USER_GROUP_MAXSIZE         (150)
-#define  RT_USER_GROUP_ICON_MAXSIZE   (100)
+#define  RT_USER_GROUP_MAXSIZE         (200)
+#define  RT_USER_GROUP_ICON_MAXSIZE   (200)
 
 #define RT_USERS_CENTER_NONE				-1
 #define RT_USERS_CENTER_ON_ALERT       1

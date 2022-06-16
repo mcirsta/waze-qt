@@ -16,7 +16,7 @@ maemo5 {
 
 MOBILITY = location systeminfo multimedia contacts sensors
 
-DEFINES += TOUCH_SCREEN SSD FREEMAP_IL PLAY_CLICK LOCALE_SAFE PORT_RELEASE=\'\"v0.0.12\"\'
+DEFINES += USE_QT TOUCH_SCREEN SSD FREEMAP_IL PLAY_CLICK LOCALE_SAFE PORT_RELEASE=\'\"v0.0.12\"\'
 
 # Please do not modify the following two lines. Required for deployment.
 include(qmlapplicationviewer/qmlapplicationviewer.pri)

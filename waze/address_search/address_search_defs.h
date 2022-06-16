@@ -22,6 +22,7 @@
 #define  __ADDRESS_SEARCH_DEFS_H__
 
 #include "../roadmap_history.h"
+#include "roadmap.h"
 #define  ADSR_WEBSVC_CFG_FILE          ("preferences")
 #define  ADSR_WEBSVC_CFG_TAB           ("Address Search")
 #define  ADSR_WEBSVC_ADDRESS           ("Web-Service Address")

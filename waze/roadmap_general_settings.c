@@ -809,7 +809,7 @@ void roadmap_general_settings_show(void) {
       ssd_widget_add (box,
                       ssd_choice_new ( "Logging", roadmap_lang_get("Logging"), 2,
                                        loglevel_labels,
-                                       loglevels,
+                                       (const void **)loglevels,
                                       SSD_ALIGN_RIGHT|SSD_ALIGN_VCENTER, NULL) );
       ssd_widget_add(box, space(1));
       ssd_widget_add(box, ssd_separator_new("separator", SSD_ALIGN_BOTTOM));

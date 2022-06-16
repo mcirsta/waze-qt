@@ -59,7 +59,7 @@ static int DlMapProgress = -1;
 static int DlMapTotalSize = -1;
 static char DlMapFileName[256];
 static char DlMapFileFullName[256];
-static char DlMapTempFullName[256];
+static char DlMapTempFullName[500];
 static void *DlContext = NULL;
 static int DlFips = 0;
 static RoadMapFile DlFile = ROADMAP_INVALID_FILE;
@@ -147,6 +147,7 @@ static void dlmap_close (int success) {
 
 static int  DlMapCallbackSize	(void *context, size_t size) {
 
+    (void)context;
 	DlMapTotalSize = size;
 	
 	//TODO: check free file space
@@ -162,8 +163,9 @@ static int  DlMapCallbackSize	(void *context, size_t size) {
 	return 1;	 	
 }
 
-void DlMapCallbackProgress (void *context, char *data, size_t size) {
+void DlMapCallbackProgress (void *context,const char *data, size_t size) {
 
+    (void)context;
 	if (ROADMAP_FILE_IS_VALID (DlFile)) {
 		size_t written = roadmap_file_write (DlFile, data, size);
 		if (written != size) {
@@ -180,6 +182,8 @@ void DlMapCallbackProgress (void *context, char *data, size_t size) {
 
 void DlMapCallbackError (void *context, int connection_failure, const char *format, ...) {
 
+   (void)context;
+   (void)connection_failure;
    va_list ap;
    char err_string[1024];
 
@@ -195,10 +199,15 @@ void DlMapCallbackError (void *context, int connection_failure, const char *form
 
 void DlMapCallbackDone (void *context, char *last_modified, const char *format, ... ) {
 
+    (void)context;
+    (void)format;
+    (void)last_modified;
 	dlmap_close (1);	
 }
 
 static void DlMapConfirmCallback(int exit_code, void *context){
+
+    (void)context;
     if (exit_code != dec_yes)
          return;
     ssd_dialog_hide_all( dec_close);
@@ -250,7 +259,7 @@ void roadmap_map_download_region (const char *region_code, int fips) {
 
 	DlFips = fips;
 	roadmap_map_download_build_file_name( fips );
-	snprintf (DlMapTempFullName, sizeof (DlMapTempFullName), "%s_", DlMapFileFullName);
+    snprintf (DlMapTempFullName, sizeof (DlMapTempFullName)+1, "%s_", DlMapFileFullName);
 	
 	snprintf (url, sizeof(url), "%s/%s/%s", 
 				 roadmap_config_get (&DlMapSourceConf),
