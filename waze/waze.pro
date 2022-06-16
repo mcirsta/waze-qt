@@ -21,6 +21,7 @@ QT       += core gui sql network
 TEMPLATE = app
 TARGET = waze
 CONFIG -= staticlib
+LIBS += -lz
 
 linux {
     LIBS += -ldl -lrt -lssl -lcrypto
@@ -278,19 +279,7 @@ SOURCES += \
     navigate/navigate_tts.c \
     roadmap_base64.c \
     navigate/navigate_route_events.c \
-    roadmap_zlib.c \
-    zlib/zutil.c \
-    zlib/uncompr.c \
-    zlib/trees.c \
-    zlib/inftrees.c \
-    zlib/inflate.c \
-    zlib/inffast.c \
-    zlib/infback.c \
-    zlib/gzio.c \
-    zlib/deflate.c \
-    zlib/crc32.c \
-    zlib/compress.c \
-    zlib/adler32.c
+    roadmap_zlib.c
 
 HEADERS += \
     roadmap_types.h \
@@ -605,18 +594,7 @@ HEADERS += \
     navigate/navigate_tts_defs.h \
     navigate/navigate_tts.h \
     roadmap_base64.h \
-    navigate/navigate_route_events.h \
-    zlib/zutil.h \
-    zlib/zlib.h \
-    zlib/zconf.in.h \
-    zlib/zconf.h \
-    zlib/trees.h \
-    zlib/inftrees.h \
-    zlib/inflate.h \
-    zlib/inffixed.h \
-    zlib/inffast.h \
-    zlib/deflate.h \
-    zlib/crc32.h
+    navigate/navigate_route_events.h
 
 OTHER_FILES += \
     qtc_packaging/debian_fremantle/README \
@@ -634,15 +612,6 @@ OTHER_FILES += \
     qtc_packaging/debian_harmattan/waze.aegis \
     qtc_packaging/debian_harmattan/postinst \
     qtc_packaging/debian_harmattan/rules \
-    zlib/zlib.3 \
-    zlib/README \
-    zlib/Makefile.in \
-    zlib/Makefile \
-    zlib/INDEX \
-    zlib/FAQ \
-    zlib/configure \
-    zlib/ChangeLog \
-    zlib/algorithm.txt \
     qtc_packaging/debian_ubuntu_oneiric/rules \
     qtc_packaging/debian_ubuntu_oneiric/README \
     qtc_packaging/debian_ubuntu_oneiric/copyright \

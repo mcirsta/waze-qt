@@ -50,7 +50,7 @@
 #include "roadmap_preferences.h"
 #include "roadmap_spawn.h"
 #include "roadmap_db.h"
-#include "zlib/zlib.h"
+#include "zlib.h"
 #include "navigate/navigate_main.h"
 #include "Realtime/RealtimeTrafficInfo.h"
 

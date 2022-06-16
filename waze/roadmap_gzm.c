@@ -25,7 +25,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-#include "zlib/zlib.h"
+#include "zlib.h"
 
 #include "roadmap_gzm.h"
 #include "roadmap.h"
