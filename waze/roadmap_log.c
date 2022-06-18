@@ -161,7 +161,7 @@ const char *roadmap_log_access_mode()
 #elif defined(ANDROID)
    return ("a+");
 #elif !defined (J2ME)
-   return ("sa");
+   return ("a+");
 #else
    //return ("w");
 #endif

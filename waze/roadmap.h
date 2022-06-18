@@ -163,7 +163,7 @@ static inline void do_assert(char *text) {
 
 #define DEBUG_LEVEL_SET_PATTERN  "2##2"
 
-#define  DEFAULT_LOG_LEVEL       ROADMAP_MESSAGE_WARNING
+#define  DEFAULT_LOG_LEVEL       ROADMAP_MESSAGE_DEBUG
 
 #ifdef   WIN32_DEBUG
    ///[BOOKMARK]:[NOTE] - In case of fatal error - halt process and wait for debugger to attach
