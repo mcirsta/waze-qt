@@ -282,7 +282,7 @@ BOOL on_favorites_name( int         exit_code,
 void generic_search_add_to_favorites()
 {
 
-#if ((defined(__SYMBIAN32__) && !defined(TOUCH_SCREEN)) || defined(IPHONE) || defined(ANDROID) ) || defined(QTMOBILITY)
+#if ((defined(__SYMBIAN32__) && !defined(TOUCH_SCREEN)) || defined(IPHONE) || defined(ANDROID) ) || defined(USE_QT)
    ShowEditbox(roadmap_lang_get("Name"), "",
             on_favorites_name, NULL, EEditBoxStandard | EEditBoxAlphaNumeric );
 #else

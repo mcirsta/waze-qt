@@ -4,7 +4,7 @@
  *
  *   Copyright 2009 Avi Ben-Shoshan
  *
- *   thiz file is part of RoadMap.
+ *   This file is part of RoadMap.
  *
  *   RoadMap is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License V2 as published by

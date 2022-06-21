@@ -148,7 +148,7 @@ void roadmap_gps_raw (time_t tm, int longitude, int latitude,
 
 void roadmap_gps_shutdown (void);
 int roadmap_gps_reception_state (void);
-#ifdef QTMOBILITY
+#ifdef USE_QT
 void roadmap_gps_state_changed(int state);
 #endif
 void roadmap_gps_detect_receiver (void);

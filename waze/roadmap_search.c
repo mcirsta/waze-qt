@@ -81,7 +81,7 @@
 #include "roadmap_androidmain.h"
 #endif
 
-#ifdef QTMOBILITY
+#ifdef USE_QT
 #include "roadmap_qtmain.h"
 #endif
 
@@ -643,7 +643,7 @@ static BOOL keyboard_callback(  int         exit_code,
 
 static void on_add_to_favorites(void *data){
 
-   #if (defined(__SYMBIAN32__) && !defined(TOUCH_SCREEN)) || defined(IPHONE) || defined(ANDROID) || defined(QTMOBILITY)
+   #if (defined(__SYMBIAN32__) && !defined(TOUCH_SCREEN)) || defined(IPHONE) || defined(ANDROID) || defined(USE_QT)
       ShowEditbox(roadmap_lang_get("Name"), "",
           keyboard_callback, (void *)data, EEditBoxStandard | EEditBoxAlphaNumeric );
     #else
@@ -1743,7 +1743,7 @@ static void reset_edit_box(SsdWidget widget)
    SsdWidget edit;
    const char *text;
 // AGA TEMPORARY SOLUTION
-#if defined(ANDROID) || defined(QTMOBILITY)
+#if defined(ANDROID) || defined(USE_QT)
    search_menu_single_search();
    return;
 #endif

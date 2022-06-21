@@ -61,7 +61,7 @@
 
 
 
-#if ((defined IPHONE) || (defined ANDROID) || (defined QTMOBILITY))
+#if ((defined IPHONE) || (defined ANDROID) || (defined USE_QT))
 #define BROWSER_WEB_VERSION         "1"
 #else
 #define BROWSER_WEB_VERSION         "0"

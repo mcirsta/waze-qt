@@ -346,7 +346,7 @@ static RoadMapImage createBGImage (RoadMapImage BarBgImage) {
 void editor_bar_initialize(void){
 
     RoadMapCallback callback = NULL;
-#ifdef QTMOBILTY
+#ifdef USE_QT
     callback = editor_track_state_changed;
 #endif
    roadmap_config_declare_enumeration ("preferences", &RoadMapConfigFeatureEnabled, callback, "no",

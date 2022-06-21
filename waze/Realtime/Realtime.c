@@ -4075,7 +4075,7 @@ int RealTimeLoginState(void){
         new_state = 1;
     }
 
-#ifdef QTMOBILITY
+#ifdef USE_QT
     Realtime_login_state_changed(new_state);
 #endif
 
@@ -4685,7 +4685,7 @@ static void recommend_waze_dialog_callbak(int exit_code, void *context){
     if (exit_code != dec_yes)
          return;
 
-#if (defined(__SYMBIAN32__) && !defined(TOUCH_SCREEN)) || defined(ANDROID) || defined(QTMOBILITY)
+#if (defined(__SYMBIAN32__) && !defined(TOUCH_SCREEN)) || defined(ANDROID) || defined(USE_QT)
     ShowEditbox(roadmap_lang_get("Phone number"), "",
             keyboard_callback, NULL, EEditBoxEmptyForbidden | EEditBoxNumeric );
 #else

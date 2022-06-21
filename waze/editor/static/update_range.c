@@ -365,7 +365,7 @@ static int button_callback (SsdWidget widget, const char *new_value) {
    }
 
 
-#if (defined(__SYMBIAN32__) && !defined(TOUCH_SCREEN)) || defined(IPHONE) || defined(ANDROID) || defined(QTMOBILITY)
+#if (defined(__SYMBIAN32__) && !defined(TOUCH_SCREEN)) || defined(IPHONE) || defined(ANDROID) || defined(USE_QT)
     ShowEditbox(title, "",
             keyboard_callback, (void *)widget, EEditBoxStandard | EEditBoxNumeric );
 #else

@@ -898,7 +898,7 @@ void editor_track_toggle_new_roads (void) {
 
    roadmap_screen_redraw ();
 
-#ifdef QTMOBILTY
+#ifdef USE_QT
    editor_track_state_changed();
 #endif
 }
@@ -1160,7 +1160,7 @@ void editor_track_initialize (void) {
        ("preferences", &RoadMapConfigStartWithRoadRoller, NULL,  "Never", "Always", "Non-random", NULL);
 
     RoadMapCallback callback = NULL;
-#ifdef QTMOBILTY
+#ifdef USE_QT
     callback = editor_track_state_changed;
 #endif
    roadmap_config_declare_enumeration
@@ -1182,7 +1182,7 @@ void editor_track_initialize (void) {
    	    EditorAllowNewRoads =1;
    	    editor_track_set_fuzzy ();
    		editor_bar_show();
-#ifdef QTMOBILTY
+#ifdef USE_QT
         editor_track_state_changed();
 #endif
    }

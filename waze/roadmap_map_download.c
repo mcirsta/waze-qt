@@ -259,7 +259,7 @@ void roadmap_map_download_region (const char *region_code, int fips) {
 
 	DlFips = fips;
 	roadmap_map_download_build_file_name( fips );
-    snprintf (DlMapTempFullName, sizeof (DlMapTempFullName)+1, "%s_", DlMapFileFullName);
+    snprintf (DlMapTempFullName, sizeof (DlMapTempFullName) - strlen(DlMapTempFullName) -1, "%s_", DlMapFileFullName);
 	
 	snprintf (url, sizeof(url), "%s/%s/%s", 
 				 roadmap_config_get (&DlMapSourceConf),

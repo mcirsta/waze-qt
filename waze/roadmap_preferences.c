@@ -261,7 +261,7 @@ static void roadmap_preferences_show (const char *file, const char *title) {
     if (context == NULL) {
 
         context = (ConfigurationContext *)
-                        roadmap_allocate_and_check (sizeof(ConfigurationContext));
+        roadmap_allocate_and_check (sizeof(ConfigurationContext));
 
         context->name = strdup(title);
         context->children = NULL;

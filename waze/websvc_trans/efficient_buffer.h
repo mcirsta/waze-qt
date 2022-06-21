@@ -26,7 +26,7 @@
    Abstract:   Will allocate memory statically or dynamically, depends on the 
                requested size.
                Up to size 'EBUFFER_STATIC_SIZE', ebuffer will use the static 
-               memory. Above thiz size data will be allocated from the heap.
+               memory. Above this size data will be allocated from the heap.
 
    Note:       It is assumed that data can be a string, thus allocated buffer 
                will always be NULL terminated.                                                           

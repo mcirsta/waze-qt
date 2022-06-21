@@ -49,7 +49,7 @@ void roadmap_lang_set_update_time(const char *update_time);
 void roadmap_lang_reload(void);
 void roadmap_lang_set_lang_file_update_time(char *lang_value, char *update_time);
 
-#ifdef QTMOBILITY
+#ifdef USE_QT
 void roadmap_lang_loaded();
 #endif
 #endif // __ROADMAP_LANG__H

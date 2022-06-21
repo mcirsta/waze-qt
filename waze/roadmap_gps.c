@@ -47,6 +47,7 @@
 #include "roadmap_trip.h"
 #include "roadmap_nmea.h"
 #include "roadmap_gpsd2.h"
+#include "roadmap_libgps.h"
 #include "roadmap_warning.h"
 #include "roadmap_analytics.h"
 #include "navigate/navigate_main.h"
@@ -158,7 +159,7 @@ static roadmap_gps_logger   RoadMapGpsLoggers[ROADMAP_GPS_CLIENTS] = {NULL};
 #define ROADMAP_GPS_CSV      6
 #define ROADMAP_GPS_ANDROID  7
 #define ROADMAP_GPS_IPHONE   8
-#define ROADMAP_GPS_QTM      9
+#define ROADMAP_GPS_LIBGPS   11
 
 #define RM_GPS_WARNING_TIMEOUT	 30000 /* Timeout before the GPS data becomes reliable (msec) */
 
@@ -295,7 +296,7 @@ static void roadmap_gps_update_reception (void) {
     	 roadmap_state_refresh ();
       }
 
-#ifdef QTMOBILITY
+#ifdef USE_QT
       roadmap_gps_state_changed(new_state);
 #endif
    }
@@ -1302,21 +1303,13 @@ void roadmap_gps_open (void) {
 
 #if !defined(J2ME) && !defined(QTMOBILITY)
    if (strncasecmp (url, "gpsd://", 7) == 0) {
+	if (roadmap_libgps_connect(&RoadMapGpsLink, url + 7, "2947")) {
+		roadmap_log (ROADMAP_ERROR, "cannot subscribe to gpsd");
+	} else {
+		RoadMapGpsProtocol = ROADMAP_GPS_LIBGPS;
+		RoadMapGpsLink.subsystem = ROADMAP_IO_FILE;
+	}
 
-      RoadMapGpsLink.os.socket = roadmap_net_connect ("tcp", url+7, 0, 2947, 0, NULL);
-
-      if (ROADMAP_NET_IS_VALID(RoadMapGpsLink.os.socket)) {
-
-         if (roadmap_net_send (RoadMapGpsLink.os.socket, "r\n", 2, 1) == 2) {
-
-            RoadMapGpsLink.subsystem = ROADMAP_IO_NET;
-
-         } else {
-
-            roadmap_log (ROADMAP_WARNING, "cannot subscribe to gpsd");
-            roadmap_net_close(RoadMapGpsLink.os.socket);
-         }
-      }
 
    } else if (strncasecmp (url, "gpsd2://", 8) == 0) {
 
@@ -1476,7 +1469,12 @@ void roadmap_gps_open (void) {
          roadmap_gps_nmea();
          break;
 
-#if !defined (J2ME) && !defined (__SYMBIAN32__) && !defined (QTMOBILITY)
+      case ROADMAP_GPS_LIBGPS:
+         roadmap_libgps_subscribe_to_navigation (roadmap_gps_navigation);
+         roadmap_libgps_subscribe_to_satellites (roadmap_gps_satellites);
+         roadmap_libgps_subscribe_to_dilution   (roadmap_gps_dilution);
+         break;
+#if !defined (J2ME) && !defined (__SYMBIAN32__)
       case ROADMAP_GPS_GPSD2:
 
          roadmap_gpsd2_subscribe_to_navigation (roadmap_gps_navigation);
@@ -1792,7 +1790,7 @@ int  roadmap_gps_is_nmea (void) {
       case ROADMAP_GPS_CSV:               return 0;
       case ROADMAP_GPS_OBJECT:            return 0;
       case ROADMAP_GPS_J2ME:              return 0;
-      case ROADMAP_GPS_QTM:               return 0;
+//TODO      case ROADMAP_GPS_QTM:               return 0;
       case ROADMAP_GPS_SYMBIAN:           return 0; //TODO can return 1 as well
    }
 

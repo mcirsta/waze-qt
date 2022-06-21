@@ -1028,7 +1028,7 @@ static void roadmap_display_console_box
         return;
     }
 
-#ifdef QTMOBILITY
+#ifdef USE_QT
     {
         roadmap_display_set_message(text);
         return;

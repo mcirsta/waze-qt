@@ -89,7 +89,7 @@ static int dec2bin (char c) {
 
 static time_t roadmap_nmea_decode_time (const char *hhmmss,
                                         const char *ddmmyy) {
-#ifndef QTMOBILITY
+#ifndef USE_QT
    static struct tm tm;
 
 #ifdef J2ME

@@ -103,7 +103,7 @@ void roadmap_mood_dialog (RoadMapCallback callback);
 const char *roadmap_mood_get();
 const char *roadmap_mood_get_name();
 void roadmap_mood_set(const char *value);
-#ifdef QTMOBILITY
+#ifdef USE_QT
 void roadmap_mood_changed(int state);
 #endif
 const char *roadmap_mood_get_top_name();

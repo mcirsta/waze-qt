@@ -123,7 +123,7 @@ typedef void (*CB_OnWSTCompleted)( void* context, roadmap_result res);
 //                               "abc\n", then method should return pointer
 //                               to "cbs".
 //    On failure     -  NULL
-//                      In thiz case parsing is stopped and transaction fails.
+//                      In this case parsing is stopped and transaction fails.
 typedef const char* (*CB_OnWSTResponse)(  /* IN  */   const char*       data,
                                           /* IN  */   void*             context,
                                           /* OUT */   BOOL*             more_data_needed,

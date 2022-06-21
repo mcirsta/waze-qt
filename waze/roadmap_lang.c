@@ -214,7 +214,7 @@ static void roadmap_lang_new_item (const char *name, const char *value) {
 
    RoadMapLangCount++;
 
-#if defined(QTMOBILITY) || (!defined( _WIN32) && !defined(ANDROID))
+#if defined(USE_QT) || (!defined( _WIN32) && !defined(ANDROID))
    {
       //cache characters
       int width, ascent, descent, can_tilt=1;
@@ -288,7 +288,7 @@ void roadmap_lang_reload(void){
 
    RoadMapLangRTL = (strcasecmp(roadmap_lang_get ("RTL"), "Yes") == 0);
 
-#ifdef QTMOBILITY
+#ifdef USE_QT
    roadmap_lang_loaded();
 #endif
 }
@@ -458,7 +458,7 @@ void roadmap_lang_initialize (void) {
    }
    RoadMapLangRTL = (strcasecmp(roadmap_lang_get ("RTL"), "Yes") == 0);
 
-#ifdef QTMOBILITY
+#ifdef USE_QT
    roadmap_lang_loaded();
 #endif
 

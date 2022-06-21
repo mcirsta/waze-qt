@@ -144,7 +144,7 @@ void generic_search_dlg_switch_gui(void)
       ssd_dialog_set_current_scroll_flag(TRUE);
    else
    {
-#if (defined(__SYMBIAN32__) && !defined(TOUCH_SCREEN)) || defined(ANDROID) || defined(QTMOBILITY)
+#if (defined(__SYMBIAN32__) && !defined(TOUCH_SCREEN)) || defined(ANDROID) || defined(USE_QT)
     ssd_dialog_draw ();
 
     roadmap_main_set_periodic( 50, reopen_keyboard);

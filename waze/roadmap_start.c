@@ -3386,7 +3386,7 @@ void roadmap_start_exit (void) {
 #endif
     roadmap_history_save ();
     roadmap_screen_shutdown ();
-#if !defined(__SYMBIAN32__) || defined(QTMOBILITY)
+#if !defined(__SYMBIAN32__) || defined(USE_QT)
     roadmap_start_save_trip ();
 #endif
 #ifdef J2ME
@@ -3395,7 +3395,7 @@ void roadmap_start_exit (void) {
     roadmap_config_save (0);
 #endif
     editor_main_shutdown ();
-#if !defined(__SYMBIAN32__) || defined(QTMOBILITY)
+#if !defined(__SYMBIAN32__) || defined(USE_QT)
     roadmap_db_end ();
 #endif
     roadmap_gps_shutdown ();

@@ -161,7 +161,7 @@ void	RealTime_Auth (void);
 void RecommentToFriend(void);
 
 int         RealTimeLoginState(void);
-#ifdef QTMOBILITY
+#ifdef USE_QT
 void Realtime_login_state_changed(int state);
 #endif
 const char* RealTime_GetUserName();

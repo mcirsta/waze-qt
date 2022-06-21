@@ -56,7 +56,7 @@ static BOOL RoadMapNetMonEnabled = FALSE;
 static void periodic_callack (void) {
 
    if( RoadMapNetMonEnabled == FALSE || (
-#if !defined (_WIN32) || defined(QTMOBILITY)
+#if !defined (_WIN32) || defined(USE_QT)
       (CurrentState == NET_MON_IDLE) &&
 #endif   // _WIN32
          ((time(NULL) - LastActivityTime) > ACTIVITY_TIMEOUT_SEC)) ) {
@@ -175,7 +175,7 @@ void roadmap_net_mon_send (size_t size) {
  */
 void roadmap_net_mon_recv (size_t size) {
 
-#if !defined(_WIN32) || defined(QTMOBILITY)
+#if !defined(_WIN32) || defined(USE_QT)
   waze_assert (CurrentState != NET_MON_DISABLED);
 #endif
 

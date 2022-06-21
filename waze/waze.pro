@@ -21,7 +21,7 @@ QT       += core gui sql network
 TEMPLATE = app
 TARGET = waze
 CONFIG -= staticlib
-LIBS += -lz
+LIBS += -lz -lgps
 
 linux {
     LIBS += -ldl -lrt -lssl -lcrypto
@@ -136,6 +136,7 @@ SOURCES += \
     roadmap_address_tc.c \
     roadmap_address_ssd.c \
     roadmap.c \
+    roadmap_libgps.c \
     editor/editor_screen.c \
     editor/editor_points.c \
     editor/editor_plugin.c \
@@ -321,6 +322,7 @@ HEADERS += \
     roadmap_input_type.h \
     roadmap_lang.h \
     roadmap_screen.h \
+    roadmap_libgps.h \
     address_search/local_search_dlg.h \
     address_search/local_search.h \
     address_search/generic_search_dlg.h \

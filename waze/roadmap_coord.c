@@ -166,7 +166,7 @@ static int roadmap_coord_to_binary (const char *image, int is_longitude) {
 
          if (! is_longitude) return 181000000; /* Invalid on purpose. */
          /* Otherwise same as 1 & 2.. */
-         __attribute__ ((fallthrough));
+         // fall through
 
       case 1:
       case 2:
@@ -178,7 +178,7 @@ static int roadmap_coord_to_binary (const char *image, int is_longitude) {
 
          if (! is_longitude) return 181000000; /* Invalid on purpose. */
          /* Otherwise same as 4.. */
-         __attribute__ ((fallthrough));
+         // fall through
 
       case 4:
 
@@ -191,7 +191,7 @@ static int roadmap_coord_to_binary (const char *image, int is_longitude) {
 
          if (! is_longitude) return 181000000; /* Invalid on purpose. */
          /* Otherwise same as 6.. */
-         __attribute__ ((fallthrough));
+         // fall through
 
       case 6:
 

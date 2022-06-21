@@ -278,7 +278,7 @@ void wst_term( wst_handle h)
       if( trans_idle != session->state)
       {
          //assert(0);  // THIS IS NOT AN ERROR
-                     // Just left thiswaze_assert in order to see if this case happens...
+                     // Just left this assert in order to see if this case happens...
 
          session->delete_on_idle = TRUE;
          wst_stop_trans( h, FALSE);

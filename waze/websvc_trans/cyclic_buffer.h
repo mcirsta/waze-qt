@@ -50,10 +50,10 @@ typedef struct tag_cyclic_buffer
 // o  read_processed - Out of 'read_size', how much was processed.
 //
 // o  data_size      - Over size of all expected data
-//                      thiz value is set once, and remains const during
+//                      This value is set once, and remains const during
 //                      the transaction
 // o  data_processed - Out of 'data_size', how much was processed.
-//                      thiz value is incremented-only during the transaction
+//                      This value is incremented-only during the transaction
 //
 // When (data_processed == data_size) transaction completed
 

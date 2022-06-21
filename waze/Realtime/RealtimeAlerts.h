@@ -294,7 +294,7 @@ void RTAlerts_Init(void);
 void RTAlerts_Term(void);
 BOOL RTAlerts_Add(RTAlert *alert);
 BOOL RTAlerts_Remove(int iID);
-#ifdef QTMOBILITY
+#ifdef USE_QT
 void RTAlerts_count_changed(const char *count);
 #endif
 void RTAlerts_RefreshOnMap(void);
