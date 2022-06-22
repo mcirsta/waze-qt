@@ -1746,6 +1746,8 @@ static void roadmap_gps_csv_tracker( time_t gps_time, char status, const RoadMap
 }
 
 int roadmap_gps_active (void) {
+    //TODO
+    return 1;
 #if defined(IPHONE) || defined(ANDROID) || defined(QTMOBILITY)
    return 1;
 #endif // IPHONE, ANDROID
